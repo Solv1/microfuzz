@@ -1,4 +1,3 @@
-
 /**
   ******************************************************************************
   * @file           : main.c
@@ -70,7 +69,7 @@ volatile uint16_t g_coverageList[MAX_BLOCKS_PER_INPUT];
 volatile uint16_t * g_covListPtr = 0; //Used in ASM function to point to the coverage list
 uint32_t * g_sutStartPtr = 0; //Points to the start of our sut for coverage tracing
 uint8_t g_isIncreasing = 0;
-size_t g_iterations = 0;
+uint32_t g_iterations = 0;
 
 /*-----------------------------------------------------------------------------------------*/
 
@@ -163,7 +162,7 @@ int16_t  mutator(mutationContext_t * mutPtr, poolContext_t * poolPtr){
     }
 
     /*Mutation type calced here to increase readability. Readable out of struct easier from host*/
-    if(mutPtr->stageCycles >= 135 || mutPtr->mutationDegression > 1){
+    if(mutPtr->stageCycles >= 192 || mutPtr->mutationDegression > 1){
     	mutPtr->currentMutation = RANDOM;
     }
     else if(mutPtr->stageCycles < 2){
@@ -184,20 +183,20 @@ int16_t  mutator(mutationContext_t * mutPtr, poolContext_t * poolPtr){
     else if(mutPtr->stageCycles < 12){
 		mutPtr->currentMutation = BYTEFLIP4_1;
 	}
-    else if(mutPtr->stageCycles < 48){
+    else if(mutPtr->stageCycles < 82){
 		mutPtr->currentMutation = ADDINTVALUE;
 	}
-    else if(mutPtr->stageCycles < 82){
+    else if(mutPtr->stageCycles < 152){
 		mutPtr->currentMutation = SUBINTVALUE;
 	}
-    else if(mutPtr->stageCycles < 100 && poolPtr->nSeeds > 1){
+    else if(mutPtr->stageCycles < 172 && poolPtr->nSeeds > 1){
     	//TODO: Add checks for input size here.
     	mutPtr->currentMutation = SPLICE;
     }
-    else if(mutPtr->stageCycles < 105){
+    else if(mutPtr->stageCycles < 182){
     	mutPtr->currentMutation = SHRINK;
     }
-    else if(mutPtr->stageCycles < 110){
+    else if(mutPtr->stageCycles < 192){
 		mutPtr->currentMutation = PAD;
     }
 
@@ -269,18 +268,31 @@ int16_t  mutator(mutationContext_t * mutPtr, poolContext_t * poolPtr){
 			}
         }
     }
+    else if(mutPtr->currentMutation == ADDINTVALUE && mutPtr->stageCycles > 46){
+         for (i = 1; i < inputSize - 1; i+=2){
+         	testCase[i] = testCase[i] + (mutPtr->stageCycles % 35);
+         }
+    }
     else if(mutPtr->currentMutation == ADDINTVALUE){
         for(i = 0; i < inputSize; i+=2){
         	testCase[i] = testCase[i] + (mutPtr->stageCycles % 35);
 
         }
+   }
+    else if(mutPtr->currentMutation == SUBINTVALUE && mutPtr->stageCycles > 82){
+        for(i = 1; i < inputSize -1; i+=2){
+                testCase[i] = testCase[i] - (mutPtr->stageCycles % 35);
+
+        }
     }
+
     else if(mutPtr->currentMutation == SUBINTVALUE){
         for(i = 0; i < inputSize; i+=2){
                 testCase[i] = testCase[i] - (mutPtr->stageCycles % 35);
 
         }
     }
+
     else if(mutPtr->currentMutation == SPLICE){
     	size_t rndSeed = rand() % poolPtr->nSeeds; //Choose a random seed to SPLICE with current testcase
     	size_t posCur = mutPtr->testCaseBuffer->size/2;
@@ -439,16 +451,16 @@ void dequeue_seed(mutationContext_t * mutPtr, poolContext_t * poolPtr){
        if(mutPtr->mutationDegression < 10){
     	   mutPtr->mutationDegression++;
        }
-       if(mutPtr->mutationDegression <= 10){
+       if(mutPtr->mutationDegression >= 10){
     	   mutPtr->mutationDegression = 1;
        }
    }
-    //Zero out the buffer before use.
-    for(i = 0; i < MAX_TESTCASE_LEN; i++){
-        mutPtr->testCaseBuffer->testCase[i] = 0;
-    }
 
-    //Copy the seed over.
+   //Zero out the buffer.
+   for(i = 0; i < MAX_TESTCASE_LEN; i++){
+   	   mutPtr->testCaseBuffer->testCase[i] = 0;
+   }
+
    for(i = 0; i < poolPtr->localPool[poolPtr->seedHead].size; i++){
 	   mutPtr->testCaseBuffer->testCase[i] = poolPtr->localPool[poolPtr->seedHead].testCase[i];
    }
@@ -466,7 +478,7 @@ void check_for_coverage(mutationContext_t * mutPtr){
 
     if(g_isIncreasing && (g_coverageList[0] != UINT_MAX)){
 //        intersting_cases++;
-    //    bubble_coverage();
+        bubble_coverage();
     	//Breakpoint HERE
         /* Clear the coverage map*/
         for(i = 0; i < MAX_BLOCKS_PER_INPUT; i++){
