@@ -8,7 +8,7 @@ _coverage_trace();
 		_coverage_trace();
 //		printf("Hit the D case\n");
 		if(args[1] == 'E'){
-//			_coverage_trace();
+			_coverage_trace();
 //			printf("Hit the E case\n");
 			if(args[2]== 'A'){
 				_coverage_trace();

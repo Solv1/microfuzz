@@ -2,28 +2,26 @@
 import subprocess 
 import logging
 import time
+import struct
 import os
 import argparse
 import random
 import signal
+import datetime
 #import toml
 
 from pygdbmi.gdbcontroller import GdbController
-import pygdbmi.gdbmiparser as parser
 
-logger = logging.getLogger(__name__)
 MAX_SEED_SIZE = 256
-INCOV = 1 #Change this
-CRASH = 2 #Change this 
+
 LOGGING = True
 
 COVERAGE_INCREASING_LINE = 484 #Change this
 
-isCoverage = False #forgive me father
 
 def debug_log(f):
     """
-        Logging decorator for debugging.
+    Decorator for log debugging.
     """
     def log(self, *args, **kwargs):
         if LOGGING == True:
@@ -34,6 +32,19 @@ def debug_log(f):
             res = f(self, *args, **kwargs)
         return res
     return log
+
+def timing(f):
+    """
+    Decorator used for timing functions.
+    """
+    def timefun(self, *args, **kwargs):
+        start = time.time()
+        res = f(self, *args, **kwargs)
+        end = time.time()
+        print(f'Time Elasped: {end-start}s')
+        return res
+    return timefun
+
 
 #Need to be able to build a program here as well.
 #Init for fuzzing instance
@@ -84,27 +95,27 @@ class GDBInstance:
         response = self.controller.write('-interpreter-exec console "source command_extension.py"',
         timeout_sec=10
         )
-        print(response)
+       # print(response)
         #response = self.controller.write('-interpreter-exec console "source command_extension.py"',
         #            timeout_sec=10
         #            )
-        print(response)
+        #print(response)
         response = self.controller.write("-file-exec-and-symbols " + bin_file , 
                                timeout_sec=5
                     )
-        print(response)
+        #print(response)
         response = self.controller.write(['-interpreter-exec console "monitor reset"'],
                     timeout_sec=5
                     )
-        print(response)
+        #print(response)
         response = self.controller.write(["-target-download"],
                     timeout_sec=5
                     )
-        print(response)
+        #print(response)
         response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
                     timeout_sec=5
                     )
-        print(response)
+        #print(response)
         #response = self.controller.write(["-break-insert main"])
         #TODO: Set breakpoints at approaite places here.
         #response = self.controller.write(["-exec-continue"])
@@ -134,6 +145,8 @@ class GDBInstance:
     def remove_breakpoint(self, num):
         response = self.controller.write(["-break-delete " + num ])
     
+
+    #@timing
     def write_memory(self, label:str, data:str):
         """
         @desc: abstraction for memory writing using GDB.
@@ -147,29 +160,32 @@ class GDBInstance:
             data = data + '0'
 
         response = self.controller.write('-data-write-memory-bytes ' + label + ' ' + data) #TODO: URGENT, check the format that is obtained from this. Should be hex values being set.
-    
+
+
+    #@timing
     def read_memory(self, label, amount):
-        response = self.controller.get_gdb_response(timeout_sec=10, raise_error_on_timeout=False)
-        print(response)
-        print(f'-data-read-memory-bytes {label} {amount}')
+        response = self.controller.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
+        #print(response)
+        #print(f'-data-read-memory-bytes {label} {amount}')
         gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + amount)
-        print(gdb_response)
+        #print(gdb_response)
 
         #Parse the dic response for infomation
-        print(gdb_response[0]['payload']['memory'][0]['contents'])
-        
+        #print(gdb_response[0]['payload']['memory'][0]['contents'])
         parsed_response = gdb_response[0]['payload']['memory'][0]['contents']
 
         return parsed_response
 
-
+    def clear_breakpoint(self):
+        response = self.controller.write('-interpreter-exec console "clear"')
+        return response
         
         #MUST PARSE RESPONSE HERE TO OBTAIN seed from response.
 
     def continue_execution(self):
         response = self.controller.write("-exec-continue")
                                         # timeout_sec = 2)
-        #print(response)
+        print(response)
         return response
         
     def check_for_response(self):
@@ -178,6 +194,7 @@ class GDBInstance:
 
     def halt_exeuction(self):
         response = self.controller.write(['-interpreter-exec console "monitor halt "'])
+        return response
     
     
     #def get_address(self):
@@ -214,6 +231,15 @@ class Fuzzer:
         self.max_seed_size = max_seed_size
 
         self.pid = os.getpid() #So that GDB can communicate back instances of a crash or coverage..
+
+        #-----Fuzzing Context------
+        self.iterations = 0
+        self.start_time = 0
+        self.current_time = 0
+        self.isCoverage = False
+
+
+
     
     @debug_log
     def check_seed_size(self):
@@ -236,6 +262,7 @@ class Fuzzer:
                 file.write(new_seed)
             global_pool_size+=1
 
+    @timing
     @debug_log
     def write_local_pool(self, seeds):
         """
@@ -243,7 +270,7 @@ class Fuzzer:
         """
         #TODO: Maybe have a toml file for breakpoint configurations etc...
         local_pool_label = "dequeue_seed"
-        self.gdb.halt_exeuction() 
+        self.gdb.halt_exeuction()
         self.gdb.set_breakpoint(local_pool_label)
         self.gdb.continue_execution()
 
@@ -255,10 +282,11 @@ class Fuzzer:
             self.gdb.write_memory('&poolPtr.localPool[+'+ str(i)+ '].testCase', ''.join(str(seeds[i][0]))) #TWrites seed content 
             self.gdb.write_memory('&poolPtr.localPool[+'+ str(i)+ '].testCase', str(seeds[i][1])) #Writes size of seed
 
-
-        self.gdb.remove_breakpoint('3')
+        self.gdb.clear_breakpoint()
+        #self.gdb.remove_breakpoint('3')
         # self.gdb.continue_execution()
 
+    @timing
     @debug_log
     def pull_current_testcase(self) -> list:
         """
@@ -271,7 +299,6 @@ class Fuzzer:
         test_case = self.gdb.read_memory(test_case_label+'testCase', str(test_case_size))
         
         #Loading and reading seed values are all in hex
-        print(test_case , 16)
         return test_case
 
     @debug_log
@@ -307,6 +334,14 @@ class Fuzzer:
     def find_coverage_calls(self):
         #TODO: Implement binary anaysis.
         pass
+    
+    def _reverse_endianness(self, data):
+
+        two_string = [(data[i:i+2]) for i in range(0, len(data), 2)] #Break up the string into byte sized chunks
+        new_string = two_string[::-1] #Reverse the bytes
+        reversed = "".join(new_string)
+
+        return reversed
 
     @debug_log
     def init_global_state(self):
@@ -314,8 +349,25 @@ class Fuzzer:
         Read the binary and find calls with their offsets. Information on ASM is found in config file (ideally)
         """
         #TODO: Do this intialization stuff.
-        pass
+        little_endian_pointer = self.gdb.read_memory('&g_sutStartPtr', '4')
+        function_pointer = self._reverse_endianness(little_endian_pointer)
+        print(function_pointer)
 
+
+    @debug_log
+    def check_iterations(self):
+        """
+        Reads memory from board to store number of global iterations.
+        """
+        board_its = self.gdb.read_memory('&g_iterations', '4')
+        reversed_hex = bytes.fromhex(board_its)[::-1].hex()
+        print(reversed_hex)
+        integer = (int(reversed_hex, 16))
+        #print(integer)
+        self.iterations += integer
+        self.gdb.write_memory('&g_iterations', '0')
+
+    @timing
     @debug_log
     def handle_coverage_increasing(self):
         """
@@ -326,17 +378,37 @@ class Fuzzer:
         global_seeds = os.listdir(self.seed_dir)
         global_pool_size = len(global_seeds)
 
-        print(seed)
+        print(f'New seed: {seed}')
+
+        self.check_iterations()
+        print(f'Iterations: {self.iterations}')
+
+        self.current_time = time.time()
+
+        elpased_time = self.current_time - self.start_time
+
+        print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
+
+        seeds = self.seed_selection()
+        self.write_local_pool(seeds)
+
+        
+        now = datetime.datetime.now()
+        print(f'Current time {now}.')
+
+
+
 
         with open(self.seed_dir + str(global_pool_size + 1), 'w') as fp:
             fp.write(str(seed))
 
-
+    @timing
     @debug_log
-    def signal_handler(loc, signum, frame):
-        global isCoverage
-
-        isCoverage = True
+    def signal_handler(self,signum, frame):
+        
+        #global isCoverage
+        self.isCoverage = True
+        #isCoverage = True
         signame = signal.Signals(signum).name
         print(f'Signal handler called with signal {signame} ({signum})')
 
@@ -348,6 +420,8 @@ class Fuzzer:
     @debug_log
     def init_campaign(self):
         #set breakpoints, load seed pool, start tracking the global coverage state. 
+        now = datetime.datetime.now()
+        print(f'Starting time {now}.')
 
         self.init_signal_handler()
         
@@ -360,6 +434,10 @@ class Fuzzer:
         
         seeds = self.seed_selection()
         self.write_local_pool(seeds)
+
+        self.init_global_state()
+
+        self.start_time = time.time()
         # self.gdb.continue_execution()
 
     @debug_log
@@ -367,15 +445,14 @@ class Fuzzer:
         """
         The main loop of the fuzzing experiance. 
         """
-        global isCoverage
 
         self.gdb.continue_execution()
     
         while(True):
 
-            if isCoverage:
+            if self.isCoverage:
                 self.handle_coverage_increasing()
-                isCoverage = False
+                self.isCoverage = False
                 self.gdb.continue_execution()
 
     @debug_log
@@ -385,17 +462,24 @@ class Fuzzer:
     @debug_log
     def shutdown(self):
         """
-            Closes OCD and GDB sessions. Along with anyother clean up nessacary. 
+        Closes OCD and GDB sessions. Along with anyother clean up nessacary. 
         """
+        self.gdb.halt_exeuction()
+        self.check_iterations()
+        print(f'Iterations: {self.iterations}')
+
+        self.current_time = time.time()
+
+        elpased_time = self.current_time - self.start_time
+
+        print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
+
         self.gdb.end_session()
         self.ocd.end_session()
 
 
 def main():
-    logging.basicConfig(filename='fuzz.log', level=logging.INFO)
-
-    logger.info('Starting Microfuzz')
-
+    
     parser = argparse.ArgumentParser(
         prog='Microfuzz',
         description='Fuzzer for varrious Microcontrollers',
@@ -427,10 +511,10 @@ def main():
     args = parser.parse_args()
     #print(args)
     
-    # try:
-    fuzz = Fuzzer(args.s,args.r,args.c, args.b, args.l, 256)
-    fuzz.init_campaign()
-    fuzz.execute_campaign()
+    try:
+        fuzz = Fuzzer(args.s,args.r,args.c, args.b, args.l, 256)
+        fuzz.init_campaign()
+        fuzz.execute_campaign()
     # ocd = OCDInstance(args.c, "Cortex-M4", "Hardware")
     # ocd.start_session()
     # time.sleep(3) #Wait a few seconds to start the GDB instance.
@@ -438,10 +522,9 @@ def main():
     # gdb.load_program(args.b)
     # seeds = [[34,54,23,45,32,43,12,34,54],[34,53,12,69,45,65,43]]
     # gdb.write_local_pool(seeds)
-    # except Exception as e:
+    except KeyboardInterrupt:
     #     print(e)
-    #     #logger.info('Closing instances now.')
-    #     fuzz.shutdown()
+        fuzz.shutdown()
     #     # gdb.end_session()
     #     # ocd.end_session()
 
