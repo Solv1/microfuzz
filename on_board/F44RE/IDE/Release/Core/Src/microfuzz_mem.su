@@ -1,2 +1,0 @@
-../Core/Src/microfuzz_mem.c:14:6:volatile_memset	8	static
-../Core/Src/microfuzz_mem.c:28:8:volatile_memcpy	8	static
