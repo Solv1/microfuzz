@@ -88,13 +88,16 @@ class GDBInstance:
 
     def load_program(self, bin_file):
         
-        response = self.controller.write("-target-select extended-remote localhost:3333",
+        response = self.controller.write("-target-select remote localhost:3333",
                     timeout_sec=5
                     )
         #print(response)
         response = self.controller.write('-interpreter-exec console "source command_extension.py"',
         timeout_sec=10
         )
+        # response = self.controller.write('-gdb-set target-async on',
+        # timeout_sec=10
+        # )
        # print(response)
         #response = self.controller.write('-interpreter-exec console "source command_extension.py"',
         #            timeout_sec=10
@@ -104,7 +107,7 @@ class GDBInstance:
                                timeout_sec=5
                     )
         #print(response)
-        response = self.controller.write(['-interpreter-exec console "monitor reset"'],
+        response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
                     timeout_sec=5
                     )
         #print(response)
@@ -112,13 +115,13 @@ class GDBInstance:
                     timeout_sec=5
                     )
         #print(response)
-        response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
-                    timeout_sec=5
-                    )
+        # response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
+                    # timeout_sec=5
+                    # )
         #print(response)
         #response = self.controller.write(["-break-insert main"])
         #TODO: Set breakpoints at approaite places here.
-        #response = self.controller.write(["-exec-continue"])
+        response = self.controller.write(["-exec-continue"])
         #print(response)
         print('Program successfully loaded')
         #TODO: Check the reponse to see if the gdb connection is valid.
@@ -156,23 +159,47 @@ class GDBInstance:
         """
         #TODO: Check response for validity and for 
 
-        if not len(data) % 2: #Data length has to be an even amount.
-            data = data + '0'
+        # if not len(data) % 2: #Data length has to be an even amount.
+        #     data = data + '0'
+        
+        command = '-data-write-memory-bytes ' + label + ' ' + data
+        print(command)
+        try:
+            response = self.controller.write(command) #TODO: URGENT, check the format that is obtained from this. Should be hex values being set.
+        except:
+            print(f'LOG: Failed to write memory @{label}')
+        print(response)
 
-        response = self.controller.write('-data-write-memory-bytes ' + label + ' ' + data) #TODO: URGENT, check the format that is obtained from this. Should be hex values being set.
-
+    def continue_execution(self):
+        response = self.controller.write("-exec-continue", timeout_sec = 10)
+        print(response)
+        return response
+    
+    def halt_exeuction(self):
+        os.kill(self.controller.gdb_process.pid, 2)
+        # response = self.controller.write("-exec-interrupt", timeout_sec=30)
+        response = self.controller.get_gdb_response(timeout_sec=10, raise_error_on_timeout=False)
+        print(response)
+        return response
 
     #@timing
     def read_memory(self, label, amount):
-        response = self.controller.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
-        #print(response)
+        #response = self.controller.get_gdb_response(timeout_sec=3, raise_error_on_timeout=False)
+        # response = self.halt_exeuction()
+        # print(response)
         #print(f'-data-read-memory-bytes {label} {amount}')
-        gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + amount)
+        try:
+            gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + amount, timeout_sec=10)
+        except:
+            print(f'LOG: Failed to read memory @{label}')
+            return None
+            # gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + amount)
         #print(gdb_response)
 
         #Parse the dic response for infomation
         #print(gdb_response[0]['payload']['memory'][0]['contents'])
         parsed_response = gdb_response[0]['payload']['memory'][0]['contents']
+        
 
         return parsed_response
 
@@ -182,19 +209,13 @@ class GDBInstance:
         
         #MUST PARSE RESPONSE HERE TO OBTAIN seed from response.
 
-    def continue_execution(self):
-        response = self.controller.write("-exec-continue")
-                                        # timeout_sec = 2)
-        print(response)
-        return response
+
         
     def check_for_response(self):
         response = self.controller.get_gdb_response(timeout_sec=10, raise_error_on_timeout=False)
         return response
 
-    def halt_exeuction(self):
-        response = self.controller.write(['-interpreter-exec console "monitor halt "'])
-        return response
+
     
     
     #def get_address(self):
@@ -264,13 +285,15 @@ class Fuzzer:
 
     @timing
     @debug_log
-    def write_local_pool(self, seeds):
+    def write_local_pool(self, seeds, isSetup):
         """
         Load a local pool onto target. list of seeds is a tuple of (<seed_content>, <size>)
         """
+
+        # if not isSetup:
+            # self.gdb.halt_exeuction()
         #TODO: Maybe have a toml file for breakpoint configurations etc...
         local_pool_label = "dequeue_seed"
-        self.gdb.halt_exeuction()
         self.gdb.set_breakpoint(local_pool_label)
         self.gdb.continue_execution()
 
@@ -279,12 +302,11 @@ class Fuzzer:
         #Command to write -data-write-memory-bytes poolPtr.localPool[0].testCase+(offset) + '<hex_value>'
         #Command to read -data-read-memory poolPtr.localPool[0].testCase x 1 1 <seed size>
         for i in range(0, len(seeds)):
-            self.gdb.write_memory('&poolPtr.localPool[+'+ str(i)+ '].testCase', ''.join(str(seeds[i][0]))) #TWrites seed content 
-            self.gdb.write_memory('&poolPtr.localPool[+'+ str(i)+ '].testCase', str(seeds[i][1])) #Writes size of seed
+            self.gdb.write_memory('&g_localPool[+'+ str(i)+ '].testCase', ''.join(str(seeds[i][0]))) #TWrites seed content 
+            self.gdb.write_memory('&g_localPool[+'+ str(i)+ '].size', str(seeds[i][1])) #Writes size of seed
 
         self.gdb.clear_breakpoint()
         #self.gdb.remove_breakpoint('3')
-        # self.gdb.continue_execution()
 
     @timing
     @debug_log
@@ -292,13 +314,15 @@ class Fuzzer:
         """
         Pull the current testcase off of a device when there is a coverage increasing case or a crash.
         """
+        # self.gdb.halt_exeuction()
         test_case = None
-        test_case_label = '&mutPtr.testCaseBuffer.'
+        test_case_label = '&g_testCaseBuffer.'
 
         test_case_size = int(self.gdb.read_memory(test_case_label+'size','1'), 16)
         test_case = self.gdb.read_memory(test_case_label+'testCase', str(test_case_size))
         
         #Loading and reading seed values are all in hex
+        # self.gdb.continue_execution()
         return test_case
 
     @debug_log
@@ -308,7 +332,7 @@ class Fuzzer:
         global_seeds = os.listdir(self.seed_dir)
         global_pool_size = len(global_seeds)
 
-        if global_pool_size <= self.local_pool_size: #Don't need to randomly select just load seeds one by one.
+        if global_pool_size <= int(self.local_pool_size): #Don't need to randomly select just load seeds one by one.
             for seed in global_seeds:
 
                 with open(self.seed_dir + str(seed), "r") as file:
@@ -349,6 +373,13 @@ class Fuzzer:
         Read the binary and find calls with their offsets. Information on ASM is found in config file (ideally)
         """
         #TODO: Do this intialization stuff.
+        random_bytes = os.urandom(4)
+        random_number = int.from_bytes(random_bytes)
+        print(random_bytes, random_number )
+        self.gdb.write_memory('&g_randomSeed', str(random_number))
+        
+        
+
         little_endian_pointer = self.gdb.read_memory('&g_sutStartPtr', '4')
         function_pointer = self._reverse_endianness(little_endian_pointer)
         print(function_pointer)
@@ -359,13 +390,23 @@ class Fuzzer:
         """
         Reads memory from board to store number of global iterations.
         """
+        # self.gdb.halt_exeuction()
+        
         board_its = self.gdb.read_memory('&g_iterations', '4')
+        print(board_its)
+        if (board_its == None):
+            return
         reversed_hex = bytes.fromhex(board_its)[::-1].hex()
         print(reversed_hex)
         integer = (int(reversed_hex, 16))
-        #print(integer)
+        print(integer)
         self.iterations += integer
-        self.gdb.write_memory('&g_iterations', '0')
+        self.current_time = time.time()
+        elpased_time = self.current_time - self.start_time
+        self.gdb.write_memory('&g_iterations', '00000000')
+        print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
+        
+        # self.gdb.continue_execution()
 
     @timing
     @debug_log
@@ -390,14 +431,11 @@ class Fuzzer:
         print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
 
         seeds = self.seed_selection()
-        self.write_local_pool(seeds)
+        self.write_local_pool(seeds, False)
 
         
         now = datetime.datetime.now()
         print(f'Current time {now}.')
-
-
-
 
         with open(self.seed_dir + str(global_pool_size + 1), 'w') as fp:
             fp.write(str(seed))
@@ -419,26 +457,26 @@ class Fuzzer:
     
     @debug_log
     def init_campaign(self):
-        #set breakpoints, load seed pool, start tracking the global coverage state. 
+        #set breakpoints, load seed pool, start tracking the global coverage state.
+        #The target device needs to be halted while entering this function. 
         now = datetime.datetime.now()
         print(f'Starting time {now}.')
 
         self.init_signal_handler()
-        
-        self.check_seed_size()
 
         #The labels for the breakpoints should also be in the configuration file in the future. Just hard coded for now.
-        # self.gdb.set_breakpoint('bubble_coverage', 0) #Set this breakpoint at a certian line nuber? Instead of a label??
-        self.gdb.set_coverage_breakpoint(str(COVERAGE_INCREASING_LINE), self.pid) #Want to switch this to a specific label but I know that this isn't the best way to do it.
+        self.gdb.set_breakpoint('bubble_coverage') #Set this breakpoint at a certian line nuber? Instead of a label??
+        #self.gdb.set_coverage_breakpoint(str(COVERAGE_INCREASING_LINE), self.pid) #Want to switch this to a specific label but I know that this isn't the best way to do it.
         self.gdb.set_breakpoint('HardFault_Handler') #This may change with more robust error tracking.
         
-        seeds = self.seed_selection()
-        self.write_local_pool(seeds)
-
         self.init_global_state()
 
+
+        self.check_seed_size()
+        seeds = self.seed_selection()
+        self.write_local_pool(seeds, True)
+
         self.start_time = time.time()
-        # self.gdb.continue_execution()
 
     @debug_log
     def execute_campaign(self):
@@ -449,6 +487,10 @@ class Fuzzer:
         self.gdb.continue_execution()
     
         while(True):
+            time.sleep(10)
+            self.gdb.halt_exeuction()
+            self.check_iterations()
+            self.gdb.continue_execution()
 
             if self.isCoverage:
                 self.handle_coverage_increasing()
@@ -464,7 +506,7 @@ class Fuzzer:
         """
         Closes OCD and GDB sessions. Along with anyother clean up nessacary. 
         """
-        self.gdb.halt_exeuction()
+        
         self.check_iterations()
         print(f'Iterations: {self.iterations}')
 
