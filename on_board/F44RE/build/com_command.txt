@@ -1,0 +1,29 @@
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+  -T ./STM32F446RETX_RAM.ld \
+  --target=thumbv7m-unknown-none-eabi -mthumb \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+  ./Core/Src/branch.c \
+  ./Core/Src/coverage.S \
+  ./Core/Src/main.c \
+  ./Core/Src/system_stm32f4xx.c \
+  ./Core/Src/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32f4xx_it.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c \
+  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o

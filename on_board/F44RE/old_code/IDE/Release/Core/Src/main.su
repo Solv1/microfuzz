@@ -1,0 +1,11 @@
+../Core/Src/main.c:83:6:crash_void	0	static
+../Core/Src/main.c:88:9:fuzzer_setup	24	static
+../Core/Src/main.c:131:10:mutator	40	static
+../Core/Src/main.c:414:6:dequeue_seed	8	static
+../Core/Src/main.c:453:6:bubble_coverage	0	static
+../Core/Src/main.c:457:6:check_for_coverage	8	static
+../Core/Src/main.c:485:6:harness_loop	3928	static
+../Core/Src/main.c:527:6:board_setup	8	static
+../Core/Src/main.c:577:6:SystemClock_Config	88	static,ignoring_inline_asm
+../Core/Src/main.c:555:9:main	8	static
+../Core/Src/main.c:622:6:Error_Handler	0	static,ignoring_inline_asm
