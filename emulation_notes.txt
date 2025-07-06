@@ -1,0 +1,41 @@
+Before QEMU can be up and running you must install the ESP-IDF -> 
+
+Prerequistes: sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+Make sure the enviorment varriables are correctly set ->  . /home/santiago/Research/microfuzz/toolchains/esp/esp-idf/export.sh -> Adds the importan paths to PATH
+
+There are prerequistes -> https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-guides/tools/qemu.html
+
+sudo apt-get install -y libgcrypt20 libglib2.0-0 libpixman-1-0 libsdl2-2.0-0 libslirp0i
+
+Make sure that Xtensa-QEMU is in the Path ->  export PATH="/home/santiago/.espressif/tools/qemu-xtensa/esp_develop_9.0.0_20240606/qemu/bin/:$PATH"
+
+
+====Benchmark Notes====
+I have to configure a cmake file for each benchmark.
+**Info for ESP32**
+Tools Dir --> /home/santiago/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin
+
+After configuring the cmake file ->
+cmake -B ./test/ -DARCH=<your_arch>
+cmake --build ./test -j 22
+
+	====OnEmulator====
+
+	###THIS NEEDS TO BE REDONE OR FIXED TOM###
+	****VERY IMPORTANT**** --> Make sure that you are using the right compiler esp32s3 and the right gdb server ending in esp32s3
+	qemu-system-xtensa -machine esp32s3 -kernel basicmath.elf -gdb tcp::1234 -S
+====PicoLIB Notes====
+Building for *ESP32*
+Make sure to add /home/santiago/.local/bin to the PATH for Menson
+/home/santiago/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20240906/xtensa-esp-elf/bin -> Add to path
+
+I had this ERROR: has a path separator in its name. This is not supported, it can cause unexpected failures and will become a hard error in the future. ~~ Hopefully it means nothing.
+
+Built PicoLib for ESP32 ✅ 
+
+====11/27/24====
+Got BasicMath Benchmark running on ESP32 QEMU ✅
+Got AES Benchmark running on ESP32 QEMU ✅
+====11/28/24====
+set up alias setesp32 --> sets up terminal for esp32 work

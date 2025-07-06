@@ -1,0 +1,270 @@
+activity_record
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/activity_rec/harness.c ./Core/Src/benchmarks/activity_rec/activity_rec.c  ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+  image_classify
+  clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \               
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/image_class \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/image_class/harness.c ./Core/Src/benchmarks/image_class/image_class.c ./Core/Src/benchmarks/image_class/tm_layers.c ./Core/Src/benchmarks/image_class/tm_model.c ./Core/Src/benchmarks/image_class/tm_stat.c  ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+lorawan_down
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/lorawan_down \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/lorawan_down/lw.c ./Core/Src/benchmarks/lorawan_down/lorawan_down_test.c ./Core/Src/benchmarks/lorawan_down/inputs.c ./Core/Src/benchmarks/lorawan_down/cmac.c ./Core/Src/benchmarks/lorawan_down/aes.c ./Core/Src/benchmarks/lorawan_down/harness.c  ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+lorawan_up
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \              
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/lorawan_up \  
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/lorawan_up/lw.c ./Core/Src/benchmarks/lorawan_up/lorawan_up_test.c  ./Core/Src/benchmarks/lorawan_up/cmac.c ./Core/Src/benchmarks/lorawan_up/aes.c ./Core/Src/benchmarks/lorawan_up/harness.c  ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+apdcm_encode
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/adpcm_encode \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/adpcm_encode/adpcm_encode_test.c  ./Core/Src/benchmarks/adpcm_encode/adpcm-lib.c  ./Core/Src/benchmarks/adpcm_encode/harness.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+lzfx_comp
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/lzfx_comp/ \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/lzfx_comp/harness.c  ./Core/Src/benchmarks/lzfx_comp/lzfx.c  ./Core/Src/benchmarks/lzfx_comp/lzfx_compress_test.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+lzfx_decomp
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \               
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/lzfx_decomp/ \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/lzfx_decomp/harness.c  ./Core/Src/benchmarks/lzfx_decomp/lzfx.c  ./Core/Src/benchmarks/lzfx_decomp/lzfx_decomp_test.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+susan_corners
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \             
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/susan_corners \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/susan_corners/susan_corner.c  ./Core/Src/benchmarks/susan_corners/harness.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+susan_edges
+clang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \             
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/susan_corners \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/susan_edges/susan_edges.c  ./Core/Src/benchmarks/susan_edges/harness.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
+susan_smooth
+lang -g -O0 -mfpu=fpv4-sp-d16 -mfloat-abi=hard \             
+  -T ./STM32F446RETX_RAM.ld -Wl,--wrap=exit,--wrap=_exit,-Map=output.map \
+  --target=thumbv7m-unknown-none-eabi -mthumb -fsanitize-coverage-allowlist=allowlist.txt -fsanitize-coverage=trace-pc -fsanitize-coverage-ignorelist=blocklist.txt -fno-asynchronous-unwind-tables \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard \
+  -L/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard \
+  -lgcc -lc -lm -lnosys -lrdimon \
+  -I./Drivers/STM32F4xx_HAL_Driver/Inc \
+  -I./Drivers/CMSIS/Include \
+  -I/home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v7e-m+fp/hard/ \
+  -I./Drivers/CMSIS/Device/ST/STM32F4xx/Include \
+  -I./Core/Inc/  -I ./ -I ./Core/Inc/time_bare.h   -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/include/ \
+  -I /home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Drivers/CMSIS/Include -I ./Core/Src/benchmarks/susan_smooth \
+  -I /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/ \
+     ./Core/Src/fuzz/coverage.S \
+  ./Core/Src/main.c  ./Core/Src/benchmarks/susan_smooth/harness.c  ./Core/Src/benchmarks/susan_smooth/susan_smooth.c   ./Core/Src/stm32_core/system_stm32f4xx.c \
+  ./Core/Src/stm32_core/stm32f4xx_hal_msp.c \
+  ./Core/Src/stm32_core/stm32f4xx_it.c  ./trace-pc-guard-cb.c  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_gpio.c \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c ./Core/Src/fuzz/fuzz.c ./Core/Src/fuzz/time_bare.c  ./Core/Startup/startup_stm32f446retx.s \
+  ./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
+  -o Microfuzz.elf \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crti.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtbegin.o \
+  /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v7e-m+fp/hard/crtend.o
+
