@@ -1,0 +1,1251 @@
+     VMA      LMA     Size Align Out     In      Symbol
+       0        0        0     1 _Min_Heap_Size = 0x2048
+       0        0        0     1 _Min_Stack_Size = 0x4096
+       0        0        0     1 _estack = ORIGIN ( RAM ) + LENGTH ( RAM )
+20000000 20000000       bc     1 .isr_vector
+20000000 20000000        0     1         . = ALIGN ( 4 )
+20000000 20000000       bc     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.isr_vector)
+20000000 20000000       bc     1                 g_pfnVectors
+200000bc 200000bc        0     1         . = ALIGN ( 4 )
+200000bc 200000bc        4     4 .fuzzdata
+200000bc 200000bc        0     1         . = ALIGN ( 4 )
+200000bc 200000bc        0     1         _fuzzdatastart = .
+200000bc 200000bc        4     4         /tmp/fuzz-38ee31.o:(.fuzzdata)
+200000bc 200000bc        4     1                 cleanup_function
+200000c0 200000c0        0     1         _fuzzdataend = .
+200000c0 200000c0        0     1         . = ALIGN ( 4 )
+200000c0 200000c0        0     1 .targetdata
+200000c0 200000c0        0     1         . = ALIGN ( 4 )
+200000c0 200000c0        0     1         _targetdatastart = .
+200000c0 200000c0        0     1         . = ALIGN ( 4 )
+200000c0 200000c0        0     1         _targetdataend = .
+200000c0 200000c0        0     1 _sidata = LOADADDR ( .data )
+200000c0 200000c0      580     8 .data
+200000c0 200000c0        0     1         . = ALIGN ( 4 )
+200000c0 200000c0        0     1         _sdata = .
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memclr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memset.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memset.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memcpy.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memcpy-stub.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fwalk.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-readr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-writer.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lseekr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-closer.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_muldi3.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-exit.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o):(.data)
+200000c0 200000c0        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(_exit.o):(.data)
+200000c0 200000c0        8     8         /tmp/time_bare-e700b9.o:(.data)
+200000c0 200000c0        8     1                 g_sut_timeout
+200000c8 200000c8        8     4         /tmp/stm32g0xx_hal-8af8aa.o:(.data)
+200000c8 200000c8        4     1                 uwTickPrio
+200000cc 200000cc        4     1                 uwTickFreq
+200000d0 200000d0        4     4         /tmp/system_stm32g0xx-1889a1.o:(.data)
+200000d0 200000d0        4     1                 SystemCoreClock
+200000d4 200000d4        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o:(.data)
+200000d4 200000d4        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.data)
+200000d4 200000d4        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtend.o:(.data)
+200000d4 200000d4        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o):(.data._impure_ptr)
+200000d4 200000d4        0     1                 $d
+200000d4 200000d4        4     1                 _impure_ptr
+200000d8 200000d8      140     8         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o):(.data._impure_data)
+200000d8 200000d8        0     1                 $d
+200000d8 200000d8      140     1                 _impure_data
+20000218 20000218        c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.data.__sglue)
+20000218 20000218        0     1                 $d
+20000218 20000218        c     1                 __sglue
+20000224 20000224        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.data.__malloc_sbrk_base)
+20000224 20000224        0     1                 $d
+20000224 20000224        4     1                 __malloc_sbrk_base
+20000228 20000228        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.data.__malloc_trim_threshold)
+20000228 20000228        0     1                 $d
+20000228 20000228        4     1                 __malloc_trim_threshold
+20000230 20000230      408     8         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.data.__malloc_av_)
+20000230 20000230        0     1                 $d
+20000230 20000230      408     1                 __malloc_av_
+20000638 20000638        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.data.__atexit_recursive_mutex)
+20000638 20000638        0     1                 $d
+20000638 20000638        4     1                 __atexit_recursive_mutex
+2000063c 2000063c        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.data.__dso_handle)
+2000063c 2000063c        0     1                 $d
+2000063c 2000063c        0     1                 __dso_handle
+20000640 20000640        0     1         . = ALIGN ( 4 )
+20000640 20000640        0     1         _edata = .
+20000640 20000640     5008     4 .text
+20000640 20000640        0     1         . = ALIGN ( 4 )
+20000640 20000640       5c     4         /tmp/coverage-3f4ac7.o:(.text)
+20000640 20000640        0     1                 $t
+20000641 20000641        0     1                 __sanitizer_cov_trace_pc
+20000690 20000690        0     1                 $d
+2000069c 2000069c        2     4         /tmp/trace-pc-guard-cb-1f98fb.o:(.text)
+2000069c 2000069c        0     1                 $t
+2000069d 2000069d        2     1                 __sanitizer_cov_trace_pc_guard_init
+200006a0 200006a0       88     4         /tmp/main-a6be31.o:(.text)
+200006a0 200006a0        0     1                 $t
+200006a1 200006a1       14     1                 main
+200006b5 200006b5       6e     1                 SystemClock_Config
+20000723 20000723        6     1                 Error_Handler
+20000728 20000728        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memclr.o):(.text)
+20000728 20000728        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memset.o):(.text)
+20000728 20000728        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memset.o):(.text)
+20000728 20000728      d90     4         /tmp/fuzz-38ee31.o:(.text)
+20000728 20000728        0     1                 $t
+20000729 20000729        2     1                 crash_handler
+2000072b 2000072b        a     1                 HardFault_Handler
+20000735 20000735       50     1                 state_restore
+2000076c 2000076c        0     1                 $d
+20000784 20000784        0     1                 $t
+20000785 20000785      120     1                 fuzzer_setup
+20000860 20000860        0     1                 $d
+200008a4 200008a4        0     1                 $t
+200008a5 200008a5      954     1                 mutator
+20000cb4 20000cb4        0     1                 $d
+20000cc4 20000cc4        0     1                 $t
+20000f70 20000f70        0     1                 $d
+20000fa0 20000fa0        0     1                 $t
+20000fac 20000fac        0     1                 $d
+20000fbc 20000fbc        0     1                 $t
+200011f0 200011f0        0     1                 $d
+200011f8 200011f8        0     1                 $t
+200011f9 200011f9      118     1                 dequeue_seed
+200012fc 200012fc        0     1                 $d
+20001310 20001310        0     1                 $t
+20001311 20001311        c     1                 bubble_coverage
+20001318 20001318        0     1                 $d
+2000131c 2000131c        0     1                 $t
+2000131d 2000131d       a4     1                 check_for_coverage
+200013a4 200013a4        0     1                 $d
+200013c0 200013c0        0     1                 $t
+200013c1 200013c1       c8     1                 fuzzing_loop
+20001478 20001478        0     1                 $d
+20001488 20001488        0     1                 $t
+20001489 20001489       1c     1                 __wrap_exit
+200014a0 200014a0        0     1                 $d
+200014a4 200014a4        0     1                 $t
+200014a5 200014a5       14     1                 __wrap__exit
+200014b4 200014b4        0     1                 $d
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memcpy.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memcpy-stub.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fwalk.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.text)
+200014b8 200014b8        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.text)
+200014b8 200014b8      114     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o):(.text)
+200014b8 200014b8        0     1                 $t
+200014b8 200014b8        0     1                 .udivsi3_skip_div0_test
+200014b9 200014b9      10a     1                 __udivsi3
+200014b9 200014b9        0     1                 __aeabi_uidiv
+200015c5 200015c5        8     1                 __aeabi_uidivmod
+200015cc 200015cc        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o):(.text)
+200015cc 200015cc        0     1                 $t
+200015cd 200015cd        2     1                 __aeabi_idiv0
+200015cd 200015cd        2     1                 __aeabi_ldiv0
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-readr.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-writer.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lseekr.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-closer.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_muldi3.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o):(.text)
+200015d0 200015d0        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o):(.text)
+200015d0 200015d0      1d4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o):(.text)
+200015d0 200015d0        0     1                 $t
+200015d0 200015d0        0     1                 .divsi3_skip_div0_test
+200015d1 200015d1      1cc     1                 __divsi3
+200015d1 200015d1        0     1                 __aeabi_idiv
+2000179d 2000179d        8     1                 __aeabi_idivmod
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-exit.o):(.text)
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.text)
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o):(.text)
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.text)
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o):(.text)
+200017a4 200017a4        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(_exit.o):(.text)
+200017a4 200017a4      158     4         /tmp/time_bare-e700b9.o:(.text)
+200017a4 200017a4        0     1                 $t
+200017a5 200017a5       34     1                 setup_fuzz_time
+200017d9 200017d9        c     1                 start_fuzz_time
+200017e5 200017e5       18     1                 end_fuzz_time
+200017f8 200017f8        0     1                 $d
+200017fc 200017fc        0     1                 $t
+200017fd 200017fd       2c     1                 adjust_fuzz_time
+20001824 20001824        0     1                 $d
+20001828 20001828        0     1                 $t
+20001829 20001829       64     1                 execution_cleanup
+20001888 20001888        0     1                 $d
+2000188c 2000188c        0     1                 $t
+2000188d 2000188d       40     1                 SysTick_Handler
+200018c0 200018c0        0     1                 $d
+200018cc 200018cc        0     1                 $t
+200018cd 200018cd       2c     1                 PendSV_Handler
+200018f0 200018f0        0     1                 $d
+200018fc 200018fc       14     4         /tmp/startup_stm32g0b1xx-ee8284.o:(.text)
+20001910 20001910       b4     4         /tmp/branch-993222.o:(.text)
+20001910 20001910        0     1                 $t
+20001911 20001911       b4     1                 branch_test
+200019c4 200019c4       16     4         /tmp/harness-dc98ac.o:(.text)
+200019c4 200019c4        0     1                 $t
+200019c5 200019c5       16     1                 target_harness
+200019dc 200019dc      ed4     4         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.text)
+200019dc 200019dc        0     1                 $t
+200019dd 200019dd      110     1                 HAL_RCC_DeInit
+20001ac4 20001ac4        0     1                 $d
+20001aec 20001aec        0     1                 $t
+20001aed 20001aed      710     1                 HAL_RCC_OscConfig
+20001ef8 20001ef8        0     1                 $d
+20001f18 20001f18        0     1                 $t
+200021d4 200021d4        0     1                 $d
+200021fc 200021fc        0     1                 $t
+200021fd 200021fd      24c     1                 HAL_RCC_ClockConfig
+20002424 20002424        0     1                 $d
+20002448 20002448        0     1                 $t
+20002449 20002449      120     1                 HAL_RCC_GetSysClockFreq
+20002554 20002554        0     1                 $d
+20002568 20002568        0     1                 $t
+20002569 20002569       b4     1                 HAL_RCC_MCOConfig
+20002614 20002614        0     1                 $d
+2000261c 2000261c        0     1                 $t
+2000261d 2000261d        c     1                 HAL_RCC_GetHCLKFreq
+20002624 20002624        0     1                 $d
+20002628 20002628        0     1                 $t
+20002629 20002629       2c     1                 HAL_RCC_GetPCLK1Freq
+20002650 20002650        0     1                 $d
+20002654 20002654        0     1                 $t
+20002655 20002655       10     1                 LL_RCC_GetAPB1Prescaler
+20002660 20002660        0     1                 $d
+20002664 20002664        0     1                 $t
+20002665 20002665      164     1                 HAL_RCC_GetOscConfig
+200027b4 200027b4        0     1                 $d
+200027c8 200027c8        0     1                 $t
+200027c9 200027c9       44     1                 HAL_RCC_GetClockConfig
+20002804 20002804        0     1                 $d
+2000280c 2000280c        0     1                 $t
+2000280d 2000280d       14     1                 HAL_RCC_EnableCSS
+2000281c 2000281c        0     1                 $d
+20002820 20002820        0     1                 $t
+20002821 20002821       10     1                 HAL_RCC_EnableLSECSS
+2000282c 2000282c        0     1                 $d
+20002830 20002830        0     1                 $t
+20002831 20002831       10     1                 HAL_RCC_DisableLSECSS
+2000283c 2000283c        0     1                 $d
+20002840 20002840        0     1                 $t
+20002841 20002841       48     1                 HAL_RCC_NMI_IRQHandler
+20002880 20002880        0     1                 $d
+20002888 20002888        0     1                 $t
+20002889 20002889        2     1                 HAL_RCC_CSSCallback
+2000288b 2000288b        2     1                 HAL_RCC_LSECSSCallback
+2000288d 2000288d       24     1                 HAL_RCC_GetResetSource
+200028ac 200028ac        0     1                 $d
+200028b0 200028b0      3c8     4         /tmp/stm32g0xx_hal-8af8aa.o:(.text)
+200028b0 200028b0        0     1                 $t
+200028b1 200028b1       38     1                 HAL_Init
+200028e4 200028e4        0     1                 $d
+200028e8 200028e8        0     1                 $t
+200028e9 200028e9       7c     1                 HAL_InitTick
+20002958 20002958        0     1                 $d
+20002964 20002964        0     1                 $t
+20002965 20002965        2     1                 HAL_MspInit
+20002969 20002969       40     1                 HAL_DeInit
+20002998 20002998        0     1                 $d
+200029a8 200029a8        0     1                 $t
+200029a9 200029a9        2     1                 HAL_MspDeInit
+200029ad 200029ad       18     1                 HAL_IncTick
+200029bc 200029bc        0     1                 $d
+200029c4 200029c4        0     1                 $t
+200029c5 200029c5        c     1                 HAL_GetTick
+200029cc 200029cc        0     1                 $d
+200029d0 200029d0        0     1                 $t
+200029d1 200029d1        c     1                 HAL_GetTickPrio
+200029d8 200029d8        0     1                 $d
+200029dc 200029dc        0     1                 $t
+200029dd 200029dd       4c     1                 HAL_SetTickFreq
+20002a20 20002a20        0     1                 $d
+20002a28 20002a28        0     1                 $t
+20002a29 20002a29        c     1                 HAL_GetTickFreq
+20002a30 20002a30        0     1                 $d
+20002a34 20002a34        0     1                 $t
+20002a35 20002a35       44     1                 HAL_Delay
+20002a74 20002a74        0     1                 $d
+20002a78 20002a78        0     1                 $t
+20002a79 20002a79       10     1                 HAL_SuspendTick
+20002a84 20002a84        0     1                 $d
+20002a88 20002a88        0     1                 $t
+20002a89 20002a89       10     1                 HAL_ResumeTick
+20002a94 20002a94        0     1                 $d
+20002a98 20002a98        0     1                 $t
+20002a99 20002a99        8     1                 HAL_GetHalVersion
+20002a9c 20002a9c        0     1                 $d
+20002aa0 20002aa0        0     1                 $t
+20002aa1 20002aa1        c     1                 HAL_GetREVID
+20002aa8 20002aa8        0     1                 $d
+20002aac 20002aac        0     1                 $t
+20002aad 20002aad       14     1                 HAL_GetDEVID
+20002ab8 20002ab8        0     1                 $d
+20002ac0 20002ac0        0     1                 $t
+20002ac1 20002ac1        c     1                 HAL_GetUIDw0
+20002ac8 20002ac8        0     1                 $d
+20002acc 20002acc        0     1                 $t
+20002acd 20002acd        c     1                 HAL_GetUIDw1
+20002ad4 20002ad4        0     1                 $d
+20002ad8 20002ad8        0     1                 $t
+20002ad9 20002ad9        c     1                 HAL_GetUIDw2
+20002ae0 20002ae0        0     1                 $d
+20002ae4 20002ae4        0     1                 $t
+20002ae5 20002ae5       10     1                 HAL_DBGMCU_EnableDBGStopMode
+20002af0 20002af0        0     1                 $d
+20002af4 20002af4        0     1                 $t
+20002af5 20002af5       10     1                 HAL_DBGMCU_DisableDBGStopMode
+20002b00 20002b00        0     1                 $d
+20002b04 20002b04        0     1                 $t
+20002b05 20002b05       10     1                 HAL_DBGMCU_EnableDBGStandbyMode
+20002b10 20002b10        0     1                 $d
+20002b14 20002b14        0     1                 $t
+20002b15 20002b15       10     1                 HAL_DBGMCU_DisableDBGStandbyMode
+20002b20 20002b20        0     1                 $d
+20002b24 20002b24        0     1                 $t
+20002b25 20002b25       1c     1                 HAL_SYSCFG_VREFBUF_VoltageScalingConfig
+20002b3c 20002b3c        0     1                 $d
+20002b40 20002b40        0     1                 $t
+20002b41 20002b41       1c     1                 HAL_SYSCFG_VREFBUF_HighImpedanceConfig
+20002b58 20002b58        0     1                 $d
+20002b5c 20002b5c        0     1                 $t
+20002b5d 20002b5d       1c     1                 HAL_SYSCFG_VREFBUF_TrimmingConfig
+20002b74 20002b74        0     1                 $d
+20002b78 20002b78        0     1                 $t
+20002b79 20002b79       4c     1                 HAL_SYSCFG_EnableVREFBUF
+20002bc0 20002bc0        0     1                 $d
+20002bc4 20002bc4        0     1                 $t
+20002bc5 20002bc5       10     1                 HAL_SYSCFG_DisableVREFBUF
+20002bd0 20002bd0        0     1                 $d
+20002bd4 20002bd4        0     1                 $t
+20002bd5 20002bd5       14     1                 HAL_SYSCFG_EnableIOAnalogSwitchBooster
+20002be4 20002be4        0     1                 $d
+20002be8 20002be8        0     1                 $t
+20002be9 20002be9       14     1                 HAL_SYSCFG_DisableIOAnalogSwitchBooster
+20002bf8 20002bf8        0     1                 $d
+20002bfc 20002bfc        0     1                 $t
+20002bfd 20002bfd       18     1                 HAL_SYSCFG_EnableRemap
+20002c10 20002c10        0     1                 $d
+20002c14 20002c14        0     1                 $t
+20002c15 20002c15       18     1                 HAL_SYSCFG_DisableRemap
+20002c28 20002c28        0     1                 $d
+20002c2c 20002c2c        0     1                 $t
+20002c2d 20002c2d       18     1                 HAL_SYSCFG_EnableClampingDiode
+20002c40 20002c40        0     1                 $d
+20002c44 20002c44        0     1                 $t
+20002c45 20002c45       18     1                 HAL_SYSCFG_DisableClampingDiode
+20002c58 20002c58        0     1                 $d
+20002c5c 20002c5c        0     1                 $t
+20002c5d 20002c5d       1c     1                 HAL_SYSCFG_StrobeDBattpinsConfig
+20002c74 20002c74        0     1                 $d
+20002c78 20002c78      180     4         /tmp/system_stm32g0xx-1889a1.o:(.text)
+20002c78 20002c78        0     1                 $t
+20002c79 20002c79        2     1                 SystemInit
+20002c7d 20002c7d      17c     1                 SystemCoreClockUpdate
+20002c9c 20002c9c        0     1                 $d
+20002d20 20002d20        0     1                 $t
+20002ddc 20002ddc        0     1                 $d
+20002df8 20002df8      5b0     4         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.text)
+20002df8 20002df8        0     1                 $t
+20002df9 20002df9      2e8     1                 HAL_GPIO_Init
+200030bc 200030bc        0     1                 $d
+200030e0 200030e0        0     1                 $t
+200030e1 200030e1      19c     1                 HAL_GPIO_DeInit
+20003258 20003258        0     1                 $d
+2000327c 2000327c        0     1                 $t
+2000327d 2000327d       2c     1                 HAL_GPIO_ReadPin
+200032a9 200032a9       2a     1                 HAL_GPIO_WritePin
+200032d3 200032d3       24     1                 HAL_GPIO_TogglePin
+200032f7 200032f7       4c     1                 HAL_GPIO_LockPin
+20003345 20003345       50     1                 HAL_GPIO_EXTI_IRQHandler
+2000338c 2000338c        0     1                 $d
+20003394 20003394        0     1                 $t
+20003395 20003395        a     1                 HAL_GPIO_EXTI_Rising_Callback
+2000339f 2000339f        a     1                 HAL_GPIO_EXTI_Falling_Callback
+200033a8 200033a8      7e4     4         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.text)
+200033a8 200033a8        0     1                 $t
+200033a9 200033a9       24     1                 HAL_PWREx_EnableBatteryCharging
+200033c8 200033c8        0     1                 $d
+200033cc 200033cc        0     1                 $t
+200033cd 200033cd       14     1                 HAL_PWREx_DisableBatteryCharging
+200033dc 200033dc        0     1                 $d
+200033e0 200033e0        0     1                 $t
+200033e1 200033e1       14     1                 HAL_PWREx_EnablePORMonitorSampling
+200033f0 200033f0        0     1                 $d
+200033f4 200033f4        0     1                 $t
+200033f5 200033f5       14     1                 HAL_PWREx_DisablePORMonitorSampling
+20003404 20003404        0     1                 $d
+20003408 20003408        0     1                 $t
+20003409 20003409       bc     1                 HAL_PWREx_ConfigPVD
+200034ac 200034ac        0     1                 $d
+200034c4 200034c4        0     1                 $t
+200034c5 200034c5       10     1                 HAL_PWREx_EnablePVD
+200034d0 200034d0        0     1                 $d
+200034d4 200034d4        0     1                 $t
+200034d5 200034d5       10     1                 HAL_PWREx_DisablePVD
+200034e0 200034e0        0     1                 $d
+200034e4 200034e4        0     1                 $t
+200034e5 200034e5       14     1                 HAL_PWREx_EnableVddUSB
+200034f4 200034f4        0     1                 $d
+200034f8 200034f8        0     1                 $t
+200034f9 200034f9       14     1                 HAL_PWREx_DisableVddUSB
+20003508 20003508        0     1                 $d
+2000350c 2000350c        0     1                 $t
+2000350d 2000350d       14     1                 HAL_PWREx_EnableVddIO2
+2000351c 2000351c        0     1                 $d
+20003520 20003520        0     1                 $t
+20003521 20003521       14     1                 HAL_PWREx_DisableVddIO2
+20003530 20003530        0     1                 $d
+20003534 20003534        0     1                 $t
+20003535 20003535       14     1                 HAL_PWREx_EnablePVMUSB
+20003544 20003544        0     1                 $d
+20003548 20003548        0     1                 $t
+20003549 20003549       14     1                 HAL_PWREx_DisablePVMUSB
+20003558 20003558        0     1                 $d
+2000355c 2000355c        0     1                 $t
+2000355d 2000355d       b8     1                 HAL_PWREx_ConfigPVM
+20003604 20003604        0     1                 $d
+20003614 20003614        0     1                 $t
+20003615 20003615       14     1                 HAL_PWREx_EnableInternalWakeUpLine
+20003624 20003624        0     1                 $d
+20003628 20003628        0     1                 $t
+20003629 20003629       14     1                 HAL_PWREx_DisableInternalWakeUpLine
+20003638 20003638        0     1                 $d
+2000363c 2000363c        0     1                 $t
+2000363d 2000363d       e4     1                 HAL_PWREx_EnableGPIOPullUp
+20003658 20003658        0     1                 $d
+20003670 20003670        0     1                 $t
+200036f8 200036f8        0     1                 $d
+20003720 20003720        0     1                 $t
+20003721 20003721       98     1                 HAL_PWREx_DisableGPIOPullUp
+2000373c 2000373c        0     1                 $d
+20003754 20003754        0     1                 $t
+200037a4 200037a4        0     1                 $d
+200037b8 200037b8        0     1                 $t
+200037b9 200037b9      100     1                 HAL_PWREx_EnableGPIOPullDown
+200037d4 200037d4        0     1                 $d
+200037ec 200037ec        0     1                 $t
+20003888 20003888        0     1                 $d
+200038b8 200038b8        0     1                 $t
+200038b9 200038b9       a8     1                 HAL_PWREx_DisableGPIOPullDown
+200038d4 200038d4        0     1                 $d
+200038ec 200038ec        0     1                 $t
+20003948 20003948        0     1                 $d
+20003960 20003960        0     1                 $t
+20003961 20003961       14     1                 HAL_PWREx_EnablePullUpPullDownConfig
+20003970 20003970        0     1                 $d
+20003974 20003974        0     1                 $t
+20003975 20003975       14     1                 HAL_PWREx_DisablePullUpPullDownConfig
+20003984 20003984        0     1                 $d
+20003988 20003988        0     1                 $t
+20003989 20003989       14     1                 HAL_PWREx_EnableSRAMRetention
+20003998 20003998        0     1                 $d
+2000399c 2000399c        0     1                 $t
+2000399d 2000399d       14     1                 HAL_PWREx_DisableSRAMRetention
+200039ac 200039ac        0     1                 $d
+200039b0 200039b0        0     1                 $t
+200039b1 200039b1       18     1                 HAL_PWREx_EnableFlashPowerDown
+200039c4 200039c4        0     1                 $d
+200039c8 200039c8        0     1                 $t
+200039c9 200039c9       18     1                 HAL_PWREx_DisableFlashPowerDown
+200039dc 200039dc        0     1                 $d
+200039e0 200039e0        0     1                 $t
+200039e1 200039e1       10     1                 HAL_PWREx_GetVoltageRange
+200039ec 200039ec        0     1                 $d
+200039f0 200039f0        0     1                 $t
+200039f1 200039f1       7c     1                 HAL_PWREx_ControlVoltageScaling
+20003a5c 20003a5c        0     1                 $d
+20003a6c 20003a6c        0     1                 $t
+20003a6d 20003a6d       14     1                 HAL_PWREx_EnableLowPowerRunMode
+20003a7c 20003a7c        0     1                 $d
+20003a80 20003a80        0     1                 $t
+20003a81 20003a81       68     1                 HAL_PWREx_DisableLowPowerRunMode
+20003ad8 20003ad8        0     1                 $d
+20003ae8 20003ae8        0     1                 $t
+20003ae9 20003ae9       24     1                 HAL_PWREx_EnterSHUTDOWNMode
+20003b04 20003b04        0     1                 $d
+20003b0c 20003b0c        0     1                 $t
+20003b0d 20003b0d       7c     1                 HAL_PWREx_PVD_PVM_IRQHandler
+20003b78 20003b78        0     1                 $d
+20003b88 20003b88        0     1                 $t
+20003b89 20003b89        2     1                 HAL_PWREx_PVD_PVM_Rising_Callback
+20003b8b 20003b8b        2     1                 HAL_PWREx_PVD_PVM_Falling_Callback
+20003b8c 20003b8c      3b8     4         /tmp/stm32g0xx_hal_cortex-831cad.o:(.text)
+20003b8c 20003b8c        0     1                 $t
+20003b8d 20003b8d       18     1                 HAL_NVIC_SetPriority
+20003ba5 20003ba5       78     1                 __NVIC_SetPriority
+20003c14 20003c14        0     1                 $d
+20003c1c 20003c1c        0     1                 $t
+20003c1d 20003c1d       12     1                 HAL_NVIC_EnableIRQ
+20003c31 20003c31       24     1                 __NVIC_EnableIRQ
+20003c50 20003c50        0     1                 $d
+20003c54 20003c54        0     1                 $t
+20003c55 20003c55       12     1                 HAL_NVIC_DisableIRQ
+20003c69 20003c69       2c     1                 __NVIC_DisableIRQ
+20003c90 20003c90        0     1                 $d
+20003c94 20003c94        0     1                 $t
+20003c95 20003c95        8     1                 HAL_NVIC_SystemReset
+20003c9d 20003c9d       1c     1                 __NVIC_SystemReset
+20003cb0 20003cb0        0     1                 $d
+20003cb8 20003cb8        0     1                 $t
+20003cb9 20003cb9       12     1                 HAL_SYSTICK_Config
+20003ccd 20003ccd       50     1                 SysTick_Config
+20003d10 20003d10        0     1                 $d
+20003d1c 20003d1c        0     1                 $t
+20003d1d 20003d1d       12     1                 HAL_NVIC_GetPriority
+20003d31 20003d31       54     1                 __NVIC_GetPriority
+20003d7c 20003d7c        0     1                 $d
+20003d84 20003d84        0     1                 $t
+20003d85 20003d85       12     1                 HAL_NVIC_SetPendingIRQ
+20003d99 20003d99       24     1                 __NVIC_SetPendingIRQ
+20003db8 20003db8        0     1                 $d
+20003dbc 20003dbc        0     1                 $t
+20003dbd 20003dbd       12     1                 HAL_NVIC_GetPendingIRQ
+20003dd1 20003dd1       30     1                 __NVIC_GetPendingIRQ
+20003dfc 20003dfc        0     1                 $d
+20003e00 20003e00        0     1                 $t
+20003e01 20003e01       12     1                 HAL_NVIC_ClearPendingIRQ
+20003e15 20003e15       24     1                 __NVIC_ClearPendingIRQ
+20003e34 20003e34        0     1                 $d
+20003e38 20003e38        0     1                 $t
+20003e39 20003e39       2c     1                 HAL_SYSTICK_CLKSourceConfig
+20003e60 20003e60        0     1                 $d
+20003e64 20003e64        0     1                 $t
+20003e65 20003e65        a     1                 HAL_SYSTICK_IRQHandler
+20003e6f 20003e6f        2     1                 HAL_SYSTICK_Callback
+20003e71 20003e71       20     1                 HAL_MPU_Enable
+20003e8c 20003e8c        0     1                 $d
+20003e90 20003e90        0     1                 $t
+20003e91 20003e91       10     1                 HAL_MPU_Disable
+20003e9c 20003e9c        0     1                 $d
+20003ea0 20003ea0        0     1                 $t
+20003ea1 20003ea1       20     1                 HAL_MPU_EnableRegion
+20003eb8 20003eb8        0     1                 $d
+20003ec0 20003ec0        0     1                 $t
+20003ec1 20003ec1       20     1                 HAL_MPU_DisableRegion
+20003ed8 20003ed8        0     1                 $d
+20003ee0 20003ee0        0     1                 $t
+20003ee1 20003ee1       64     1                 HAL_MPU_ConfigRegion
+20003f38 20003f38        0     1                 $d
+20003f44 20003f44        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o:(.text)
+20003f44 20003f44        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.text)
+20003f44 20003f44        0     2         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtend.o:(.text)
+20003f44 20003f44        c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memclr.o):(.text.__aeabi_memclr)
+20003f44 20003f44        0     1                 $t
+20003f45 20003f45        a     1                 __aeabi_memclr
+20003f45 20003f45        a     1                 __aeabi_memclr8
+20003f45 20003f45        a     1                 __aeabi_memclr4
+20003f50 20003f50       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memset.o):(.text.__aeabi_memset)
+20003f50 20003f50        0     1                 $t
+20003f51 20003f51        e     1                 __aeabi_memset
+20003f51 20003f51        e     1                 __aeabi_memset8
+20003f51 20003f51        e     1                 __aeabi_memset4
+20003f60 20003f60       a8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memset.o):(.text.memset)
+20003f60 20003f60        0     1                 $t
+20003f61 20003f61       a6     1                 memset
+20004008 20004008        8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memcpy.o):(.text.__aeabi_memcpy)
+20004008 20004008        0     1                 $t
+20004009 20004009        8     1                 __aeabi_memcpy
+20004009 20004009        8     1                 __aeabi_memcpy8
+20004009 20004009        8     1                 __aeabi_memcpy4
+20004010 20004010       8c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memcpy-stub.o):(.text.memcpy)
+20004010 20004010        0     1                 $t
+20004011 20004011       8c     1                 memcpy
+2000409c 2000409c       14     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.text.srand)
+2000409c 2000409c        0     1                 $t
+2000409d 2000409d       14     1                 srand
+200040ac 200040ac        0     1                 $d
+200040b0 200040b0       34     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.text.rand)
+200040b0 200040b0        0     1                 $t
+200040b1 200040b1       34     1                 rand
+200040d8 200040d8        0     1                 $d
+200040e4 200040e4       1c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.stdio_exit_handler)
+200040e4 200040e4        0     1                 $t
+200040e5 200040e5       1c     1                 stdio_exit_handler
+200040f4 200040f4        0     1                 $d
+20004100 20004100       3c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.cleanup_stdio)
+20004100 20004100        0     1                 $t
+20004101 20004101       3c     1                 cleanup_stdio
+20004130 20004130        0     1                 $d
+2000413c 2000413c       1c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__fp_lock)
+2000413c 2000413c        0     1                 $t
+2000413d 2000413d       1a     1                 __fp_lock
+20004158 20004158       1c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__fp_unlock)
+20004158 20004158        0     1                 $t
+20004159 20004159       1a     1                 __fp_unlock
+20004174 20004174      118     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.global_stdio_init.part.0)
+20004174 20004174        0     1                 $t
+20004175 20004175      118     1                 global_stdio_init.part.0
+20004268 20004268        0     1                 $d
+2000428c 2000428c       c8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__sfp)
+2000428c 2000428c        0     1                 $t
+2000428d 2000428d       c8     1                 __sfp
+20004344 20004344        0     1                 $d
+20004354 20004354       38     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__sinit)
+20004354 20004354        0     1                 $t
+20004355 20004355       38     1                 __sinit
+20004380 20004380        0     1                 $d
+2000438c 2000438c       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__sfp_lock_acquire)
+2000438c 2000438c        0     1                 $t
+2000438d 2000438d       10     1                 __sfp_lock_acquire
+20004398 20004398        0     1                 $d
+2000439c 2000439c       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__sfp_lock_release)
+2000439c 2000439c        0     1                 $t
+2000439d 2000439d       10     1                 __sfp_lock_release
+200043a8 200043a8        0     1                 $d
+200043ac 200043ac       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__fp_lock_all)
+200043ac 200043ac        0     1                 $t
+200043ad 200043ad       20     1                 __fp_lock_all
+200043c0 200043c0        0     1                 $d
+200043cc 200043cc       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.text.__fp_unlock_all)
+200043cc 200043cc        0     1                 $t
+200043cd 200043cd       20     1                 __fp_unlock_all
+200043e0 200043e0        0     1                 $d
+200043ec 200043ec       44     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fwalk.o):(.text._fwalk_sglue)
+200043ec 200043ec        0     1                 $t
+200043ed 200043ed       44     1                 _fwalk_sglue
+20004430 20004430       d0     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.text._fclose_r)
+20004430 20004430        0     1                 $t
+20004431 20004431       ce     1                 _fclose_r
+20004500 20004500       14     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.text.fclose)
+20004500 20004500        0     1                 $t
+20004501 20004501       14     1                 fclose
+20004510 20004510        0     1                 $d
+20004514 20004514      148     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.text.__sflush_r)
+20004514 20004514        0     1                 $t
+20004515 20004515      148     1                 __sflush_r
+20004654 20004654        0     1                 $d
+2000465c 2000465c       68     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.text._fflush_r)
+2000465c 2000465c        0     1                 $t
+2000465d 2000465d       66     1                 _fflush_r
+200046c4 200046c4       7c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.text.fflush)
+200046c4 200046c4        0     1                 $t
+200046c5 200046c5       7c     1                 fflush
+20004730 20004730        0     1                 $d
+20004740 20004740       b4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.text._malloc_trim_r)
+20004740 20004740        0     1                 $t
+20004741 20004741       b4     1                 _malloc_trim_r
+200047e8 200047e8        0     1                 $d
+200047f4 200047f4      1d4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.text._free_r)
+200047f4 200047f4        0     1                 $t
+200047f5 200047f5      1d4     1                 _free_r
+200049b4 200049b4        0     1                 $d
+200049c8 200049c8       1c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o):(.text.sysconf)
+200049c8 200049c8        0     1                 $t
+200049c9 200049c9       1a     1                 sysconf
+200049e4 200049e4        c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o):(.text.__errno)
+200049e4 200049e4        0     1                 $t
+200049e5 200049e5        c     1                 __errno
+200049ec 200049ec        0     1                 $d
+200049f0 200049f0       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.text.__malloc_lock)
+200049f0 200049f0        0     1                 $t
+200049f1 200049f1       10     1                 __malloc_lock
+200049fc 200049fc        0     1                 $d
+20004a00 20004a00       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.text.__malloc_unlock)
+20004a00 20004a00        0     1                 $t
+20004a01 20004a01       10     1                 __malloc_unlock
+20004a0c 20004a0c        0     1                 $d
+20004a10 20004a10        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_init)
+20004a10 20004a10        0     1                 $t
+20004a11 20004a11        2     1                 __retarget_lock_init
+20004a14 20004a14        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_init_recursive)
+20004a14 20004a14        0     1                 $t
+20004a15 20004a15        2     1                 __retarget_lock_init_recursive
+20004a18 20004a18        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_close)
+20004a18 20004a18        0     1                 $t
+20004a19 20004a19        2     1                 __retarget_lock_close
+20004a1c 20004a1c        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_close_recursive)
+20004a1c 20004a1c        0     1                 $t
+20004a1d 20004a1d        2     1                 __retarget_lock_close_recursive
+20004a20 20004a20        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_acquire)
+20004a20 20004a20        0     1                 $t
+20004a21 20004a21        2     1                 __retarget_lock_acquire
+20004a24 20004a24        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_acquire_recursive)
+20004a24 20004a24        0     1                 $t
+20004a25 20004a25        2     1                 __retarget_lock_acquire_recursive
+20004a28 20004a28        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_try_acquire)
+20004a28 20004a28        0     1                 $t
+20004a29 20004a29        4     1                 __retarget_lock_try_acquire
+20004a2c 20004a2c        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_try_acquire_recursive)
+20004a2c 20004a2c        0     1                 $t
+20004a2d 20004a2d        4     1                 __retarget_lock_try_acquire_recursive
+20004a30 20004a30        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_release)
+20004a30 20004a30        0     1                 $t
+20004a31 20004a31        2     1                 __retarget_lock_release
+20004a34 20004a34        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.text.__retarget_lock_release_recursive)
+20004a34 20004a34        0     1                 $t
+20004a35 20004a35        2     1                 __retarget_lock_release_recursive
+20004a38 20004a38       24     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o):(.text._sbrk_r)
+20004a38 20004a38        0     1                 $t
+20004a39 20004a39       24     1                 _sbrk_r
+20004a58 20004a58        0     1                 $d
+20004a5c 20004a5c       1c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.text._sbrk)
+20004a5c 20004a5c        0     1                 $t
+20004a5d 20004a5d       1c     1                 _sbrk
+20004a70 20004a70        0     1                 $d
+20004a78 20004a78       74     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.text._reclaim_reent)
+20004a78 20004a78        0     1                 $t
+20004a79 20004a79       74     1                 _reclaim_reent
+20004ae8 20004ae8        0     1                 $d
+20004aec 20004aec      5c4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.text._malloc_r)
+20004aec 20004aec        0     1                 $t
+20004aed 20004aed      5c4     1                 _malloc_r
+20004e34 20004e34        0     1                 $d
+20004e4c 20004e4c        0     1                 $t
+200050a8 200050a8        0     1                 $d
+200050b0 200050b0       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text.__sread)
+200050b0 200050b0        0     1                 $t
+200050b1 200050b1       28     1                 __sread
+200050d4 200050d4        0     1                 $d
+200050d8 200050d8        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text.__seofread)
+200050d8 200050d8        0     1                 $t
+200050d9 200050d9        4     1                 __seofread
+200050dc 200050dc       40     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text.__swrite)
+200050dc 200050dc        0     1                 $t
+200050dd 200050dd       40     1                 __swrite
+20005118 20005118        0     1                 $d
+2000511c 2000511c       30     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text.__sseek)
+2000511c 2000511c        0     1                 $t
+2000511d 2000511d       30     1                 __sseek
+20005148 20005148        0     1                 $d
+2000514c 2000514c        c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.text.__sclose)
+2000514c 2000514c        0     1                 $t
+2000514d 2000514d        c     1                 __sclose
+20005158 20005158       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-readr.o):(.text._read_r)
+20005158 20005158        0     1                 $t
+20005159 20005159       28     1                 _read_r
+2000517c 2000517c        0     1                 $d
+20005180 20005180       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.text._read)
+20005180 20005180        0     1                 $t
+20005181 20005181       10     1                 _read
+2000518c 2000518c        0     1                 $d
+20005190 20005190       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-writer.o):(.text._write_r)
+20005190 20005190        0     1                 $t
+20005191 20005191       28     1                 _write_r
+200051b4 200051b4        0     1                 $d
+200051b8 200051b8       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.text._write)
+200051b8 200051b8        0     1                 $t
+200051b9 200051b9       10     1                 _write
+200051c4 200051c4        0     1                 $d
+200051c8 200051c8       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lseekr.o):(.text._lseek_r)
+200051c8 200051c8        0     1                 $t
+200051c9 200051c9       28     1                 _lseek_r
+200051ec 200051ec        0     1                 $d
+200051f0 200051f0       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.text._lseek)
+200051f0 200051f0        0     1                 $t
+200051f1 200051f1       10     1                 _lseek
+200051fc 200051fc        0     1                 $d
+20005200 20005200       24     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-closer.o):(.text._close_r)
+20005200 20005200        0     1                 $t
+20005201 20005201       24     1                 _close_r
+20005220 20005220        0     1                 $d
+20005224 20005224       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.text._close)
+20005224 20005224        0     1                 $t
+20005225 20005225       10     1                 _close
+20005230 20005230        0     1                 $d
+20005234 20005234       5c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_muldi3.o):(.text.__muldi3)
+20005234 20005234        0     1                 $t
+20005235 20005235       5a     1                 __muldi3
+20005235 20005235       5a     1                 __aeabi_lmul
+20005290 20005290       18     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o):(.text.calloc)
+20005290 20005290        0     1                 $t
+20005291 20005291       18     1                 calloc
+200052a4 200052a4        0     1                 $d
+200052a8 200052a8       a8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o):(.text._calloc_r)
+200052a8 200052a8        0     1                 $t
+200052a9 200052a9       a6     1                 _calloc_r
+20005350 20005350       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-exit.o):(.text.exit)
+20005350 20005350        0     1                 $t
+2000536c 2000536c        0     1                 $d
+20005370 20005370       18     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.text.startup.register_fini)
+20005370 20005370        0     1                 $t
+20005371 20005371       18     1                 register_fini
+20005380 20005380        0     1                 $d
+20005388 20005388       e8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.text.__call_exitprocs)
+20005388 20005388        0     1                 $t
+20005389 20005389       e8     1                 __call_exitprocs
+20005468 20005468        0     1                 $d
+20005470 20005470       10     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o):(.text.atexit)
+20005470 20005470        0     1                 $t
+20005471 20005471       10     1                 atexit
+20005480 20005480       a8     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.text.__register_exitproc)
+20005480 20005480        0     1                 $t
+20005481 20005481       a8     1                 __register_exitproc
+2000551c 2000551c        0     1                 $d
+20005528 20005528       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o):(.text.__libc_fini_array)
+20005528 20005528        0     1                 $t
+20005529 20005529       28     1                 __libc_fini_array
+20005548 20005548        0     1                 $d
+20005550 20005550        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(_exit.o):(.text._exit)
+20005550 20005550        0     1                 $t
+20005554 20005554       4c     4         /tmp/startup_stm32g0b1xx-ee8284.o:(.text.Reset_Handler)
+20005554 20005554        0     1                 $t
+20005555 20005555       34     1                 Reset_Handler
+20005566 20005566        0     1                 CopyDataInit
+2000556c 2000556c        0     1                 LoopCopyDataInit
+2000557a 2000557a        0     1                 FillZerobss
+2000557e 2000557e        0     1                 LoopFillZerobss
+20005586 20005586        0     1                 LoopForever
+20005588 20005588        0     1                 $d
+200055a0 200055a0        2     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.text.Default_Handler)
+200055a0 200055a0        0     1                 Infinite_Loop
+200055a0 200055a0        0     1                 $t
+200055a0 200055a0        2     1                 Default_Handler
+200055a1 200055a1        2     1                 NMI_Handler
+200055a1 200055a1        2     1                 SVC_Handler
+200055a1 200055a1        2     1                 WWDG_IRQHandler
+200055a1 200055a1        2     1                 PVD_VDDIO2_IRQHandler
+200055a1 200055a1        2     1                 RTC_TAMP_IRQHandler
+200055a1 200055a1        2     1                 FLASH_IRQHandler
+200055a1 200055a1        2     1                 RCC_CRS_IRQHandler
+200055a1 200055a1        2     1                 EXTI0_1_IRQHandler
+200055a1 200055a1        2     1                 EXTI2_3_IRQHandler
+200055a1 200055a1        2     1                 EXTI4_15_IRQHandler
+200055a1 200055a1        2     1                 USB_UCPD1_2_IRQHandler
+200055a1 200055a1        2     1                 DMA1_Channel1_IRQHandler
+200055a1 200055a1        2     1                 DMA1_Channel2_3_IRQHandler
+200055a1 200055a1        2     1                 DMA1_Ch4_7_DMA2_Ch1_5_DMAMUX1_OVR_IRQHandler
+200055a1 200055a1        2     1                 ADC1_COMP_IRQHandler
+200055a1 200055a1        2     1                 TIM1_BRK_UP_TRG_COM_IRQHandler
+200055a1 200055a1        2     1                 TIM1_CC_IRQHandler
+200055a1 200055a1        2     1                 TIM2_IRQHandler
+200055a1 200055a1        2     1                 TIM3_TIM4_IRQHandler
+200055a1 200055a1        2     1                 TIM6_DAC_LPTIM1_IRQHandler
+200055a1 200055a1        2     1                 TIM7_LPTIM2_IRQHandler
+200055a1 200055a1        2     1                 TIM14_IRQHandler
+200055a1 200055a1        2     1                 TIM15_IRQHandler
+200055a1 200055a1        2     1                 TIM16_FDCAN_IT0_IRQHandler
+200055a1 200055a1        2     1                 TIM17_FDCAN_IT1_IRQHandler
+200055a1 200055a1        2     1                 I2C1_IRQHandler
+200055a1 200055a1        2     1                 I2C2_3_IRQHandler
+200055a1 200055a1        2     1                 SPI1_IRQHandler
+200055a1 200055a1        2     1                 SPI2_3_IRQHandler
+200055a1 200055a1        2     1                 USART1_IRQHandler
+200055a1 200055a1        2     1                 USART2_LPUART2_IRQHandler
+200055a1 200055a1        2     1                 USART3_4_5_6_LPUART1_IRQHandler
+200055a1 200055a1        2     1                 CEC_IRQHandler
+200055a4 200055a4       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.text.deregister_tm_clones)
+200055a4 200055a4        0     1                 $t
+200055a5 200055a5        0     1                 deregister_tm_clones
+200055b8 200055b8        0     1                 $d
+200055c4 200055c4       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.text.register_tm_clones)
+200055c4 200055c4        0     1                 $t
+200055c5 200055c5        0     1                 register_tm_clones
+200055e0 200055e0        0     1                 $d
+200055ec 200055ec       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.text.__do_global_dtors_aux)
+200055ec 200055ec        0     1                 $t
+200055ed 200055ed        0     1                 __do_global_dtors_aux
+2000560c 2000560c        0     1                 $d
+20005618 20005618       24     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.text.frame_dummy)
+20005618 20005618        0     1                 $t
+20005619 20005619        0     1                 frame_dummy
+20005630 20005630        0     1                 $d
+20005640 20005640        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o:(.init)
+20005640 20005640        0     1                 $t
+20005641 20005641        0     1                 _init
+20005644 20005644        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o:(.fini)
+20005644 20005644        0     1                 $t
+20005645 20005645        0     1                 _fini
+20005648 20005648        0     1         . = ALIGN ( 4 )
+20005648 20005648        0     1         _etext = .
+20005648 20005648       a8     4 .rodata
+20005648 20005648        0     1         . = ALIGN ( 4 )
+20005648 20005648       60     4         /tmp/system_stm32g0xx-1889a1.o:(.rodata)
+20005648 20005648       40     1                 AHBPrescTable
+20005688 20005688       20     1                 APBPrescTable
+200056a8 200056a8       24     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.rodata.all_implied_fbits)
+200056a8 200056a8        0     1                 $d
+200056a8 200056a8        0     1                 all_implied_fbits
+200056cc 200056cc       24     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtend.o:(.rodata.all_implied_fbits)
+200056cc 200056cc        0     1                 $d
+200056cc 200056cc        0     1                 all_implied_fbits
+200056f0 200056f0        0     1         . = ALIGN ( 4 )
+200056f0 200056f0       2e     4 .gnu.warning._read
+200056f0 200056f0       2e     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.gnu.warning._read)
+200056f0 200056f0        0     1                 $d
+200056f0 200056f0       2e     1                 __evoke_link_warning__read
+20005720 20005720       2f     4 .gnu.warning._write
+20005720 20005720       2f     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.gnu.warning._write)
+20005720 20005720        0     1                 $d
+20005720 20005720       2f     1                 __evoke_link_warning__write
+20005750 20005750       2f     4 .gnu.warning._lseek
+20005750 20005750       2f     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.gnu.warning._lseek)
+20005750 20005750        0     1                 $d
+20005750 20005750       2f     1                 __evoke_link_warning__lseek
+20005780 20005780       2f     4 .gnu.warning._close
+20005780 20005780       2f     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.gnu.warning._close)
+20005780 20005780        0     1                 $d
+20005780 20005780       2f     1                 __evoke_link_warning__close
+200057af 200057af        1     1 .ARM.extab
+200057af 200057af        1     1         . = ALIGN ( 4 )
+200057b0 200057b0        0     1         . = ALIGN ( 4 )
+200057b0 200057b0       10     4 .ARM
+200057b0 200057b0        0     1         . = ALIGN ( 4 )
+200057b0 200057b0        0     1         __exidx_start = .
+200057b0 200057b0       10     4         <internal>:(.ARM.exidx)
+200057c0 200057c0        0     1         __exidx_end = .
+200057c0 200057c0        0     1         . = ALIGN ( 4 )
+200057c0 200057c0        0     1 .preinit_array
+200057c0 200057c0        0     1         . = ALIGN ( 4 )
+200057c0 200057c0        0     1         . = ALIGN ( 4 )
+200057c0 200057c0        8     4 .init_array
+200057c0 200057c0        0     1         . = ALIGN ( 4 )
+200057c0 200057c0        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.init_array.00000)
+200057c0 200057c0        0     1                 $d
+200057c4 200057c4        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.init_array)
+200057c4 200057c4        0     1                 $d
+200057c4 200057c4        0     1                 __frame_dummy_init_array_entry
+200057c8 200057c8        0     1         . = ALIGN ( 4 )
+200057c8 200057c8        4     4 .fini_array
+200057c8 200057c8        0     1         . = ALIGN ( 4 )
+200057c8 200057c8        0     1         PROVIDE_HIDDEN ( __fini_array_start = . )
+200057c8 200057c8        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.fini_array)
+200057c8 200057c8        0     1                 $d
+200057c8 200057c8        0     1                 __do_global_dtors_aux_fini_array_entry
+200057cc 200057cc        0     1         PROVIDE_HIDDEN ( __fini_array_end = . )
+200057cc 200057cc        0     1         . = ALIGN ( 4 )
+200057cc 200057cc     1140     4 .fuzzbss
+200057cc 200057cc        0     1         . = ALIGN ( 4 )
+200057cc 200057cc        0     1         _fuzzbssstart = .
+200057cc 200057cc     113c     4         /tmp/fuzz-38ee31.o:(.fuzzbss)
+200057cc 200057cc        4     1                 g_covListPtr
+200057d0 200057d0        4     1                 g_sutStartPtr
+200057d4 200057d4        1     1                 g_isIncreasing
+200057d8 200057d8        4     1                 g_iterations
+200057dc 200057dc        1     1                 g_isReset
+200057dd 200057dd        1     1                 g_isRestore
+200057e0 200057e0        4     1                 g_dataContext
+200057e4 200057e4        1     1                 g_nSeeds
+200057e6 200057e6        4     1                 g_poolContext
+200057ea 200057ea        6     1                 g_mutContext
+200057f0 200057f0      190     1                 g_coverageList
+20005980 20005980        4     1                 g_randomSeed
+20005984 20005984        4     1                 g_testCaseBuffer
+20005988 20005988      f3c     1                 g_localPool
+200068c4 200068c4       40     1                 reg_context
+20006904 20006904        4     1                 fuzzer_return
+20006908 20006908        4     4         /tmp/harness-dc98ac.o:(.fuzzbss)
+20006908 20006908        4     1                 g_sutPtr
+2000690c 2000690c        0     1         _fuzzbssend = .
+2000690c 2000690c        0     1         . = ALIGN ( 4 )
+2000690c 2000690c        0     4 .tm_clone_table
+2000690c 2000690c        0     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.tm_clone_table)
+2000690c 2000690c        0     1                 __TMC_LIST__
+2000690c 2000690c        0     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtend.o:(.tm_clone_table)
+2000690c 2000690c        0     1                 __TMC_END__
+2000690c 2000690c        0     1 .targetbss
+2000690c 2000690c        0     1         . = ALIGN ( 4 )
+2000690c 2000690c        0     1         _targetbssstart = .
+2000690c 2000690c        0     1         _targetbssend = .
+2000690c 2000690c        0     1         . = ALIGN ( 4 )
+20006910 20006910      358     8 .bss
+20006910 20006910        0     1         . = ALIGN ( 4 )
+20006910 20006910        0     1         _sbss = .
+20006910 20006910        0     1         __bss_start__ = _sbss
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memclr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memset.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memset.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memcpy.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memcpy-stub.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-impure.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fwalk.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_dvmd_tls.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-readr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-writer.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lseekr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-closer.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_muldi3.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-exit.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o):(.bss)
+20006910 20006910        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(_exit.o):(.bss)
+20006910 20006910        9     8         /tmp/time_bare-e700b9.o:(.bss)
+20006910 20006910        8     1                 g_count
+20006918 20006918        1     1                 timeout_flag
+2000691c 2000691c        4     4         /tmp/stm32g0xx_hal-8af8aa.o:(.bss)
+2000691c 2000691c        4     1                 uwTick
+20006920 20006920        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o:(.bss)
+20006920 20006920        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.bss)
+20006920 20006920        0     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtend.o:(.bss)
+20006920 20006920      138     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.bss.__sf)
+20006920 20006920        0     1                 $d
+20006920 20006920      138     1                 __sf
+20006a58 20006a58        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.bss.__stdio_exit_handler)
+20006a58 20006a58        0     1                 $d
+20006a58 20006a58        4     1                 __stdio_exit_handler
+20006a5c 20006a5c        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___arc4random_mutex)
+20006a5c 20006a5c        0     1                 $d
+20006a5c 20006a5c        1     1                 __lock___arc4random_mutex
+20006a60 20006a60        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___dd_hash_mutex)
+20006a60 20006a60        0     1                 $d
+20006a60 20006a60        1     1                 __lock___dd_hash_mutex
+20006a64 20006a64        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___tz_mutex)
+20006a64 20006a64        0     1                 $d
+20006a64 20006a64        1     1                 __lock___tz_mutex
+20006a68 20006a68        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___env_recursive_mutex)
+20006a68 20006a68        0     1                 $d
+20006a68 20006a68        1     1                 __lock___env_recursive_mutex
+20006a6c 20006a6c        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___malloc_recursive_mutex)
+20006a6c 20006a6c        0     1                 $d
+20006a6c 20006a6c        1     1                 __lock___malloc_recursive_mutex
+20006a70 20006a70        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___at_quick_exit_mutex)
+20006a70 20006a70        0     1                 $d
+20006a70 20006a70        1     1                 __lock___at_quick_exit_mutex
+20006a74 20006a74        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___atexit_recursive_mutex)
+20006a74 20006a74        0     1                 $d
+20006a74 20006a74        1     1                 __lock___atexit_recursive_mutex
+20006a78 20006a78        1     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.bss.__lock___sfp_recursive_mutex)
+20006a78 20006a78        0     1                 $d
+20006a78 20006a78        1     1                 __lock___sfp_recursive_mutex
+20006a7c 20006a7c        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.bss.heap_end.0)
+20006a7c 20006a7c        4     1                 heap_end.0
+20006a7c 20006a7c        0     1                 $d
+20006a80 20006a80        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.bss.errno)
+20006a80 20006a80        0     1                 $d
+20006a80 20006a80        4     1                 errno
+20006a84 20006a84       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.bss.__malloc_current_mallinfo)
+20006a84 20006a84        0     1                 $d
+20006a84 20006a84       28     1                 __malloc_current_mallinfo
+20006aac 20006aac        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.bss.__malloc_max_total_mem)
+20006aac 20006aac        0     1                 $d
+20006aac 20006aac        4     1                 __malloc_max_total_mem
+20006ab0 20006ab0        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.bss.__malloc_max_sbrked_mem)
+20006ab0 20006ab0        0     1                 $d
+20006ab0 20006ab0        4     1                 __malloc_max_sbrked_mem
+20006ab4 20006ab4        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.bss.__malloc_top_pad)
+20006ab4 20006ab4        0     1                 $d
+20006ab4 20006ab4        4     1                 __malloc_top_pad
+20006ab8 20006ab8        4     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.bss.__atexit)
+20006ab8 20006ab8        0     1                 $d
+20006ab8 20006ab8        4     1                 __atexit
+20006abc 20006abc      190     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.bss.__atexit0)
+20006abc 20006abc        0     1                 $d
+20006abc 20006abc      190     1                 __atexit0
+20006c4c 20006c4c        1     1         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.bss.completed.1)
+20006c4c 20006c4c        0     1                 completed.1
+20006c4c 20006c4c        0     1                 $d
+20006c50 20006c50       18     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o:(.bss.object.0)
+20006c50 20006c50        0     1                 object.0
+20006c50 20006c50        0     1                 $d
+20006c68 20006c68        0     1         . = ALIGN ( 4 )
+20006c68 20006c68        0     1         _ebss = .
+20006c68 20006c68        0     1         __bss_end__ = _ebss
+20006c68 20006c68        0     1 __heap_start = .
+20006c68 20006c68     60e0     1 ._user_heap_stack
+20006c68 20006c68        0     1         . = ALIGN ( 8 )
+20006c68 20006c68        0     1         PROVIDE ( end = . )
+20006c68 20006c68     2048     1         . = . + _Min_Heap_Size
+20008cb0 20008cb0     4096     1         . = . + _Min_Stack_Size
+2000cd46 2000cd46        0     1         __heap_end = .
+2000cd46 2000cd46        2     1         . = ALIGN ( 8 )
+       0        0       25     1 .ARM.attributes
+       0        0       25     1         /tmp/coverage-3f4ac7.o:(.ARM.attributes)
+       0        0     2b3c     1 .debug_info
+       0        0       a3     1         /tmp/coverage-3f4ac7.o:(.debug_info)
+      a3       a3       2f     1         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_info)
+      d2       d2      1a4     1         /tmp/main-a6be31.o:(.debug_info)
+     276      276      462     1         /tmp/fuzz-38ee31.o:(.debug_info)
+     6d8      6d8      1c0     1         /tmp/time_bare-e700b9.o:(.debug_info)
+     898      898      15e     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.debug_info)
+     9f6      9f6       8b     1         /tmp/branch-993222.o:(.debug_info)
+     a81      a81       77     1         /tmp/harness-dc98ac.o:(.debug_info)
+     af8      af8      78f     1         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_info)
+    1287     1287      70d     1         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_info)
+    1994     1994      1e6     1         /tmp/system_stm32g0xx-1889a1.o:(.debug_info)
+    1b7a     1b7a      3fd     1         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_info)
+    1f77     1f77      5d3     1         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_info)
+    254a     254a      5f2     1         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_info)
+       0        0      cfa     1 .debug_abbrev
+       0        0       21     1         /tmp/coverage-3f4ac7.o:(.debug_abbrev)
+      21       21       2b     1         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_abbrev)
+      4c       4c       c9     1         /tmp/main-a6be31.o:(.debug_abbrev)
+     115      115      18e     1         /tmp/fuzz-38ee31.o:(.debug_abbrev)
+     2a3      2a3      11f     1         /tmp/time_bare-e700b9.o:(.debug_abbrev)
+     3c2      3c2       1f     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.debug_abbrev)
+     3e1      3e1       5d     1         /tmp/branch-993222.o:(.debug_abbrev)
+     43e      43e       71     1         /tmp/harness-dc98ac.o:(.debug_abbrev)
+     4af      4af      16f     1         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_abbrev)
+     61e      61e      199     1         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_abbrev)
+     7b7      7b7       d1     1         /tmp/system_stm32g0xx-1889a1.o:(.debug_abbrev)
+     888      888      12d     1         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_abbrev)
+     9b5      9b5      18c     1         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_abbrev)
+     b41      b41      1b9     1         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_abbrev)
+       0        0       48     1 .debug_aranges
+       0        0       20     1         /tmp/coverage-3f4ac7.o:(.debug_aranges)
+      20       20       28     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.debug_aranges)
+       0        0     3918     1 .debug_line
+       0        0       69     1         /tmp/coverage-3f4ac7.o:(.debug_line)
+      69       69       6c     1         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_line)
+      d5       d5      148     1         /tmp/main-a6be31.o:(.debug_line)
+     21d      21d      ceb     1         /tmp/fuzz-38ee31.o:(.debug_line)
+     f08      f08      161     1         /tmp/time_bare-e700b9.o:(.debug_line)
+    1069     1069       7d     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.debug_line)
+    10e6     10e6      115     1         /tmp/branch-993222.o:(.debug_line)
+    11fb     11fb       be     1         /tmp/harness-dc98ac.o:(.debug_line)
+    12b9     12b9      fd5     1         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_line)
+    228e     228e      42a     1         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_line)
+    26b8     26b8      1af     1         /tmp/system_stm32g0xx-1889a1.o:(.debug_line)
+    2867     2867      647     1         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_line)
+    2eae     2eae      5ca     1         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_line)
+    3478     3478      4a0     1         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_line)
+       0        0      6d0     1 .debug_line_str
+       0        0      6d0     1         <internal>:(.debug_line_str)
+       0        0      ea8     1 .debug_str_offsets
+       0        0       18     1         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_str_offsets)
+      18       18       b0     1         /tmp/main-a6be31.o:(.debug_str_offsets)
+      c8       c8      1a8     1         /tmp/fuzz-38ee31.o:(.debug_str_offsets)
+     270      270       b4     1         /tmp/time_bare-e700b9.o:(.debug_str_offsets)
+     324      324       44     1         /tmp/branch-993222.o:(.debug_str_offsets)
+     368      368       38     1         /tmp/harness-dc98ac.o:(.debug_str_offsets)
+     3a0      3a0      2a0     1         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_str_offsets)
+     640      640      2b0     1         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_str_offsets)
+     8f0      8f0       b8     1         /tmp/system_stm32g0xx-1889a1.o:(.debug_str_offsets)
+     9a8      9a8      130     1         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_str_offsets)
+     ad8      ad8      1bc     1         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_str_offsets)
+     c94      c94      214     1         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_str_offsets)
+       0        0     1de0     1 .debug_str
+       0        0     1de0     1         <internal>:(.debug_str)
+       0        0      348     1 .debug_addr
+       0        0        c     1         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_addr)
+       c        c       14     1         /tmp/main-a6be31.o:(.debug_addr)
+      20       20       80     1         /tmp/fuzz-38ee31.o:(.debug_addr)
+      a0       a0       3c     1         /tmp/time_bare-e700b9.o:(.debug_addr)
+      dc       dc        c     1         /tmp/branch-993222.o:(.debug_addr)
+      e8       e8       10     1         /tmp/harness-dc98ac.o:(.debug_addr)
+      f8       f8       54     1         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_addr)
+     14c      14c       a0     1         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_addr)
+     1ec      1ec       1c     1         /tmp/system_stm32g0xx-1889a1.o:(.debug_addr)
+     208      208       2c     1         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_addr)
+     234      234       90     1         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_addr)
+     2c4      2c4       84     1         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_addr)
+       0        0       29     1 .comment
+       0        0       29     1         <internal>:(.comment)
+       0        0     1620     4 .debug_frame
+       0        0       24     4         /tmp/trace-pc-guard-cb-1f98fb.o:(.debug_frame)
+      24       24       5c     4         /tmp/main-a6be31.o:(.debug_frame)
+      80       80       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memclr.o):(.debug_frame)
+      a8       a8       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memset.o):(.debug_frame)
+      d0       d0       30     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memset.o):(.debug_frame)
+     100      100      12c     4         /tmp/fuzz-38ee31.o:(.debug_frame)
+     22c      22c       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-aeabi_memcpy.o):(.debug_frame)
+     254      254       30     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-memcpy-stub.o):(.debug_frame)
+     284      284       38     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-rand.o):(.debug_frame)
+     2bc      2bc      138     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-findfp.o):(.debug_frame)
+     3f4      3f4       38     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fwalk.o):(.debug_frame)
+     42c      42c       44     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fclose.o):(.debug_frame)
+     470      470       6c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fflush.o):(.debug_frame)
+     4dc      4dc       5c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-freer.o):(.debug_frame)
+     538      538       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o):(.debug_frame)
+     548      548        0     1                 $d
+     558      558       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sysconf.o):(.debug_frame)
+     580      580       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-errno.o):(.debug_frame)
+     5a0      5a0       40     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mlock.o):(.debug_frame)
+     5e0      5e0       b0     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lock.o):(.debug_frame)
+     690      690       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-sbrkr.o):(.debug_frame)
+     6bc      6bc       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(sbrk.o):(.debug_frame)
+     6dc      6dc       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-reent.o):(.debug_frame)
+     708      708       3c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-mallocr.o):(.debug_frame)
+     744      744       90     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-stdio.o):(.debug_frame)
+     7d4      7d4       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-readr.o):(.debug_frame)
+     800      800       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(read.o):(.debug_frame)
+     820      820       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-writer.o):(.debug_frame)
+     84c      84c       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(write.o):(.debug_frame)
+     86c      86c       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-lseekr.o):(.debug_frame)
+     898      898       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(lseek.o):(.debug_frame)
+     8b8      8b8       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-closer.o):(.debug_frame)
+     8e4      8e4       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(close.o):(.debug_frame)
+     904      904       34     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_muldi3.o):(.debug_frame)
+     938      938       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-calloc.o):(.debug_frame)
+     960      960       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-callocr.o):(.debug_frame)
+     98c      98c       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_divsi3.o):(.debug_frame)
+     99c      99c        0     1                 $d
+     9ac      9ac       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-exit.o):(.debug_frame)
+     9d4      9d4       54     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__call_atexit.o):(.debug_frame)
+     a28      a28       28     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-atexit.o):(.debug_frame)
+     a50      a50       38     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-__atexit.o):(.debug_frame)
+     a88      a88       2c     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(libc_a-fini.o):(.debug_frame)
+     ab4      ab4       20     4         /home/santiago/Research/microfuzz/toolchains/arm/gcc/arm-none-eabi/lib/thumb/v6-m/nofp/libnosys.a(_exit.o):(.debug_frame)
+     ad4      ad4       b4     4         /tmp/time_bare-e700b9.o:(.debug_frame)
+     b88      b88       30     4         /tmp/branch-993222.o:(.debug_frame)
+     bb8      bb8       30     4         /tmp/harness-dc98ac.o:(.debug_frame)
+     be8      be8      188     4         /tmp/stm32g0xx_hal_rcc-9e47c8.o:(.debug_frame)
+     d70      d70      2ac     4         /tmp/stm32g0xx_hal-8af8aa.o:(.debug_frame)
+    101c     101c       40     4         /tmp/system_stm32g0xx-1889a1.o:(.debug_frame)
+    105c     105c       d0     4         /tmp/stm32g0xx_hal_gpio-d3a05c.o:(.debug_frame)
+    112c     112c      27c     4         /tmp/stm32g0xx_hal_pwr_ex-228ba3.o:(.debug_frame)
+    13a8     13a8      278     4         /tmp/stm32g0xx_hal_cortex-831cad.o:(.debug_frame)
+       0        0       19     1 .debug_rnglists
+       0        0       19     1         /tmp/startup_stm32g0b1xx-ee8284.o:(.debug_rnglists)
+       0        0     3500     4 .symtab
+       0        0     3500     4         <internal>:(.symtab)
+       0        0      1b7     1 .shstrtab
+       0        0      1b7     1         <internal>:(.shstrtab)
+       0        0     2207     1 .strtab
+       0        0     2207     1         <internal>:(.strtab)

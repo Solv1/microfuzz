@@ -58,10 +58,10 @@ int16_t main(void)
 
 
   	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  	HAL_Init();
+//  	HAL_Init();
 
   	/* Configure the system clock */
-	SystemClock_Config();
+//	SystemClock_Config();
 
   	board_setup();
   	/* Initialize all configured peripherals */
