@@ -593,6 +593,7 @@ void fuzzing_loop() {
 			exit(-1);
 		}
 		start_fuzz_time();
+		while(1);
 		target_harness(g_testCaseBuffer->testCase, g_testCaseBuffer->size);
 		end_fuzz_time();
 
