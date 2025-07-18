@@ -1,2 +1,0 @@
-#Enable Insturmentation for just the benchmark
-src:home/santiago/Research/microfuzz/on_board/F44RE/build/microfuzz/Core/Src/branch.c

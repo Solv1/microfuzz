@@ -1,6 +1,0 @@
-#Enable Insturmentation for just the benchmark
-src:./Core/Src/benchmarks/image_class/*
-# Enable instrumentation for a specific source file
-#src:./Core/Src/benchmarks/activity_rec/activity_rec.c
-# Enable instrumentation for all functions in those files
-fun:*
