@@ -126,7 +126,7 @@ class BinaryRewrite:
                     fp.write(binascii.unhexlify(byte)) 
 
 def main():
-    test = BinaryRewrite('./Microfuzz.elf',  'arm-none-eabi-objdump', '20000b60')
+    test = BinaryRewrite('./build/Microfuzz.elf',  'arm-none-eabi-objdump', '20000b60')
     test.read_binary()
     test.find_target_signature()
     test.find_start_location()

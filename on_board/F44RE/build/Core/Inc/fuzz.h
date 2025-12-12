@@ -7,7 +7,7 @@
 #include <string.h>
 #include "time_bare.h"
 
-#define LOCAL_POOL_SIZE 15
+#define LOCAL_POOL_SIZE 5
 #define MAX_BLOCKS_PER_INPUT 100	/*This is a fixed number that is also apart of the host portion*/
 #define MAX_CYCLES 250           /*250 Cycles of mutation before getting a new seed.*/
 #define MAX_TESTCASE_LEN 256 //Max size of a testcase 256 bytes

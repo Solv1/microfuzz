@@ -14,7 +14,7 @@ mutationContext_t g_mutContext __attribute__((section(".fuzzbss")));
 
 volatile uint32_t g_randomSeed __attribute__((section(".fuzzbss")));
 
-volatile uint32_t g_coverageList[MAX_BLOCKS_PER_INPUT] __attribute__((section(".fuzzbss")));
+volatile uint32_t g_coverageList[25] __attribute__((section(".fuzzbss")));
 volatile uint32_t * g_covListPtr __attribute__((section(".fuzzbss"))) = 0;
 uint32_t * g_sutStartPtr __attribute__((section(".fuzzbss"))) = 0;
 uint8_t g_isIncreasing __attribute__((section(".fuzzbss"))) = 0;
@@ -23,10 +23,6 @@ volatile uint8_t g_isReset __attribute__((section(".fuzzbss"))) = 0;
 uint8_t g_isRestore __attribute__((section(".fuzzbss"))) = 0;
 extern void * g_sutPtr __attribute__((section(".fuzzbss")));
 
-extern uint32_t * _ebss;
-extern uint32_t * _sbss;
-extern uint32_t * _sdata;
-extern uint32_t * _edata;
 extern uint32_t * _targetdatastart;
 extern uint32_t * _targetdataend;
 
@@ -58,37 +54,6 @@ void HardFault_Handler(void) {
  * @return 	void
  *******************************************************/
 void state_restore(void) {
-/*	__asm volatile(
-		"ldr r0, =_sdata\n\t"
-		"ldr r1, =_edata\n\t"
-		"ldr r2, =_sidata\n\t"
-		"movs r3, #0\n\t"
-		"b LoopCopyDataInit\n\t"
-
-		"CopyDataInit:\n\t"
-  		"ldr r4, [r2, r3]\n\t"
-  		"str r4, [r0, r3]\n\t"
-  		"adds r3, r3, #4\n\t"
-
-		"LoopCopyDataInit:\n\t"
-  		"adds r4, r0, r3\n\t"
-  		"cmp r4, r1\n\t"
-  		"bcc CopyDataInit\n\t"
-  
-  		"ldr r2, =_sbss\n\t"
-  		"ldr r4, =_ebss\n\t"
-  		"movs r3, #0\n\t"
-  		"b LoopFillZerobss\n\t"
-
-		"FillZerobss:\n\t"
-  		"str  r3, [r2]\n\t"
-  		"adds r2, r2, #4\n\t"
-
-		"LoopFillZerobss:\n\t"
-  		"cmp r2, r4\n\t"
-  		"bcc FillZerobss\n\t"
-	);
-		*/
 	if (g_isRestore){
 		uint32_t diff;
 		diff = ((uint32_t)&_targetdataend - (uint32_t)&_targetdatastart);
@@ -161,6 +126,7 @@ int16_t fuzzer_setup(void * funPtr){
 	if (diff > 0) {
 		g_dataContext = calloc(diff , sizeof(uint8_t));
 		memcpy(g_dataContext, &_targetdatastart, diff);
+                g_isRestore = 0;
 	}
 	diff = ((uint32_t)&_targetbssend - (uint32_t)&_targetbssstart);
 	if (diff > 0) {

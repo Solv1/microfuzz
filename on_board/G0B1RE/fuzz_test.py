@@ -14,12 +14,12 @@ import binary_rewrite as bw
 from pygdbmi.gdbcontroller import GdbController
 
 MAX_SEED_SIZE = 256
-MAX_COVERAGE_POINTS = '800' #Set as 200 32-bit pointers on target
+MAX_COVERAGE_POINTS = '400' #Set as 200 32-bit pointers on target
 
 LOGGING = False
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='fuzz.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='susan_corners.log', encoding='utf-8', level=logging.DEBUG)
 logger.debug(f'--------------------------------')
 logger.debug(f'LOG: Starting Microfuzz Debug Log')
 
@@ -241,14 +241,17 @@ class GDBInstance:
         return response
     
     def halt_exeuction(self):
+        print("LOG: You are in halt_execution.")
         local_pool_label = "dequeue_seed"
         self.set_breakpoint(local_pool_label)
         response = self.continue_execution()
         logger.debug(f'DEBUG: {response}')
         # print(response)
         logger.debug('DEBUG: You are in halt_execution.')
-        # print("LOG: You are in halt_execution.")
+        
+        
         response = self.clear_breakpoint()
+        
         # print(response)
         logger.debug(f'DEBUG: {response}')
         return response
@@ -294,21 +297,30 @@ class GDBInstance:
         return parsed_response
 
     def clear_breakpoint(self):
-        response = self.controller.write('-interpreter-exec console "clear"')
+        response = self.controller.write('-interpreter-exec console "clear"', timeout_sec=20)
         return response
         
         #MUST PARSE RESPONSE HERE TO OBTAIN seed from response.
     
     def reset_board(self, bin_file):
         response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
-                    timeout_sec=5
+                    timeout_sec=10
                     )
         response = self.controller.write("-file-exec-and-symbols " + bin_file , 
-                    timeout_sec=5
+                    timeout_sec=10
                     )
         #print(response)
         response = self.controller.write(["-target-download"],
-                    timeout_sec=5
+                    timeout_sec=10
+                    )
+        response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
+                    timeout_sec=10
+                    )
+        response = self.controller.write("-file-exec-and-symbols " + bin_file , 
+                    timeout_sec=10
+                    )
+        response = self.controller.write(["-target-download"],
+                    timeout_sec=10
                     )
         #print(response)
         # response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
@@ -367,6 +379,7 @@ class Fuzzer:
         self.pid = os.getpid() #So that GDB can communicate back instances of a crash or coverage..
 
         #-----Fuzzing Context------
+        self.global_pool_size = 0
         self.iterations = 0
         self.start_time = 0
         self.current_time = 0
@@ -481,6 +494,7 @@ class Fuzzer:
         # print(global_seeds)
         # print(self.seed_dir)
         global_pool_size = len(global_seeds)
+        self.global_pool_size = global_pool_size
         # print(len(global_seeds))
 
         if global_pool_size <= int(self.local_pool_size): #Don't need to randomly select just load seeds one by one.
@@ -609,24 +623,24 @@ class Fuzzer:
         return cov_list
         
     def handle_crash(self):
-        crashing_testcase = self.pull_current_testcase()
+        try:
+            crashing_testcase = self.pull_current_testcase()
 
-        crash_area = os.listdir(self.crash_dir)
-        crashes = len(crash_area)
+            crash_area = os.listdir(self.crash_dir)
+            crashes = len(crash_area)
 
-        self.current_time = time.time()
-        with open(str(self.crash_dir)+'/'+str(self.current_time), 'w+') as fp:
-            fp.write(crashing_testcase)
+            self.current_time = time.time()
+            with open(str(self.crash_dir)+'/'+str(self.current_time), 'w+') as fp:
+                fp.write(crashing_testcase)
         
-        self.check_iterations()
-        logger.info(f'INFO: Iterations: {self.iterations}')
-        # print(f'Iterations: {self.iterations}')
-
-        
-
-        elpased_time = self.current_time - self.start_time
-        logger.info(f'INFO: Current execution speed: {self.iterations/elpased_time} tc/sec')
-        # print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
+            self.check_iterations()
+            logger.info(f'INFO: Iterations: {self.iterations}')
+            # print(f'Iterations: {self.iterations}')
+            elpased_time = self.current_time - self.start_time
+            logger.info(f'INFO: Current execution speed: {self.iterations/elpased_time} tc/sec')
+            # print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
+        except:
+            print("LOG: Failed to read the crashing testcase")
 
         self.gdb.reset_board('./rewritten.elf')
 
@@ -735,7 +749,8 @@ class Fuzzer:
         """
         The main loop of the fuzzing experiance. 
         """
-        start_time = time.clock_gettime(time.CLOCK_BOOTTIME)
+        itertions_start_time = time.clock_gettime(time.CLOCK_BOOTTIME)
+        pool_start_time = time.clock_gettime(time.CLOCK_BOOTTIME)
         self.gdb.continue_execution()
     
         while(True):
@@ -751,13 +766,23 @@ class Fuzzer:
                 self.gdb.continue_execution()
 
             check_time = time.clock_gettime(time.CLOCK_BOOTTIME)
-            if ((check_time - start_time) > 60) and not self.isCoverage and not self.isCrash:
+            if ((check_time - itertions_start_time) > 60) and not self.isCoverage and not self.isCrash:
                 os.kill(self.gdb.controller.gdb_process.pid, signal.SIGINT)
-                self.gdb.halt_exeuction()
-                self.check_iterations()
-                start_time = time.clock_gettime(time.CLOCK_BOOTTIME)
+                try:
+                    self.gdb.halt_exeuction()
+                    self.check_iterations()
+                    itertions_start_time = time.clock_gettime(time.CLOCK_BOOTTIME)
 
+                    self.gdb.continue_execution()
+                except:
+                    self.isCrash = True           
+            check_time = time.clock_gettime(time.CLOCK_BOOTTIME)
+            if ((check_time - pool_start_time) > 200 and not self.isCoverage and not self.isCrash and (self.global_pool_size > self.local_pool_size)):
+                os.kill(self.gdb.controller.gdb_process.pid, signal.SIGINT)
+                seeds = self.seed_selection()
+                self.write_local_pool(seeds, False)
                 self.gdb.continue_execution()
+        
             
                 
 
@@ -823,6 +848,13 @@ def main():
         fuzz = Fuzzer(args.s,args.r,args.c, args.b, args.l, 256)
         fuzz.init_campaign()
         fuzz.execute_campaign()
+    # ocd = OCDInstance(args.c, "Cortex-M4", "Hardware")
+    # ocd.start_session()
+    # time.sleep(3) #Wait a few seconds to start the GDB instance.
+    # gdb = GDBInstance()
+    # gdb.load_program(args.b)
+    # seeds = [[34,54,23,45,32,43,12,34,54],[34,53,12,69,45,65,43]]
+    # gdb.write_local_pool(seeds)
     except KeyboardInterrupt:
     #     print(e)
         fuzz.shutdown()

@@ -1,5 +1,5 @@
 #Enable Insturmentation for just the benchmark
-src:./Core/Src/benchmarks/jpeg_encode/*
+src:./Core/Src/benchmarks/lorawan_up/*
 # Enable instrumentation for a specific source file
 #src:./Core/Src/benchmarks/activity_rec/activity_rec.c
 # Enable instrumentation for all functions in those files

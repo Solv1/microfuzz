@@ -163,9 +163,9 @@ in voltage and temperature.*/
   *        This value is used by the RCC HAL module to compute the I2S2 clock source
   *        frequency.
   */
-#if !defined  (EXTERNAL_I2S2_CLOCK_VALUE)
-  #define EXTERNAL_I2S2_CLOCK_VALUE    12288000U /*!< Value of the I2S2 External clock source in Hz*/
-#endif /* EXTERNAL_I2S2_CLOCK_VALUE */
+/*#if !defined  (EXTERNAL_I2S2_CLOCK_VALUE)*/
+#define EXTERNAL_I2S2_CLOCK_VALUE    12288000U /*!< Value of the I2S2 External clock source in Hz*/
+/*#endif  EXTERNAL_I2S2_CLOCK_VALUE */
 #endif
 
 /* Tip: To avoid modifying this file each time you need to use different HSE,

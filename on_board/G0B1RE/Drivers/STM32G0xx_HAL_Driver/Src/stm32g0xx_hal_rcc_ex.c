@@ -994,7 +994,8 @@ uint32_t HAL_RCCEx_GetPeriphCLKFreq(uint32_t PeriphClk)
         else if (srcclk == RCC_I2S2CLKSOURCE_EXT)
         {
           /* External clock used.*/
-          frequency = EXTERNAL_I2S2_CLOCK_VALUE;
+          //frequency = EXTERNAL_I2S2_CLOCK_VALUE;
+	  frequency = 12288000U;
         }
         /* Clock not enabled for I2S2 */
         else

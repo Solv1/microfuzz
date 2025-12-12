@@ -19,7 +19,7 @@ MAX_COVERAGE_POINTS = '800' #Set as 200 32-bit pointers on target
 LOGGING = False
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='fuzz.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='susan_edges.log', encoding='utf-8', level=logging.DEBUG)
 logger.debug(f'--------------------------------')
 logger.debug(f'LOG: Starting Microfuzz Debug Log')
 
@@ -65,19 +65,33 @@ class OCDInstance:
         self.process = None         #Subprocess object for OCD processs.
 
     def start_session(self):
-        try:
-            self.process = subprocess.Popen(["openocd","-f" + self.cfg_file], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) #Attempts to start openocde instance
-            if self.process == None:
+        if self.core == "ESP32":
+            try:
+                print("LOG: Openning OCD instance.")
+                self.process = subprocess.Popen(["zsh", "-c", ". $HOME/Research/microfuzz/toolchains/esp-idf/export.sh && openocd -f board/esp32s3-builtin.cfg"] , stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) #Attempts to start openocde instance
+                time.sleep(20)
+                # if self.process == None:
+                    # raise Exception 
                 
-                raise Exception 
-        except Exception as e:
-            logger.error(f'Error: {e} -> failed to open OCD instance.')
-            # print("Error: Failed to open ocd instance.")
-            exit(-1)
+            except Exception as e:
+                print(f'Error: {e} -> failed to open OCD instance for ESP32.')
+                # print("Error: Failed to open ocd instance.")
+                exit(-1)
+        
+        else:
+            try:
+                self.process = subprocess.Popen(["openocd","-f" + self.cfg_file], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) #Attempts to start openocde instance
+                if self.process == None:
+                    raise Exception 
+            except Exception as e:
+                logger.error(f'Error: {e} -> failed to open OCD instance.')
+                # print("Error: Failed to open ocd instance.")
+                exit(-1)
             
     def end_session(self):
-        self.process.terminate()   #Kills running openocd process
-        self.process.wait()
+        self.process.kill()   #Kills running openocd process
+        return_val = self.process.wait()
+        print(f"LOG: OpenOCD instance closed with return {return_val}")
 
         
 
@@ -85,25 +99,80 @@ class GDBInstance:
 
     #
 
-    def __init__(self):
+    def __init__(self, core):
         #make sure to have the GDB flavor in PATH
         #self.controller = GdbController(['arm-none-eabi-gdb-py', '--interpreter=mi2'])
+        self.core = core
+
+        if core == "ESP32":
+            try:
+                self.controller = GdbController(['xtensa-esp32s3-elf-gdb', '--interpreter=mi2'])
+            except Exception as e :
+                logger.error(f'ERROR: {e} -> failed to open GDB instance.')
+                # print("Error: Failed to open GDB instance.")
+                exit(-1)
+        else:
+
+            try:
+                self.controller = GdbController(['arm-none-eabi-gdb-py', '--interpreter=mi2'])
+            except Exception as e :
+                logger.error(f'ERROR: {e} -> failed to open GDB instance.')
+                # print("Error: Failed to open GDB instance.")
+                exit(-1)
+        #TODO: Use the toggle breakpoint command.
+    def set_controller(self, controller):
+        self.controller = controller
+
+    def close_instance(self):
+        self.controller.exit()
+
+    def start_instance(self):
+        self.controller = GdbController(['xtensa-esp32s3-elf-gdb', '--interpreter=mi2'])
+        return self.controller
+
+
+    def clear_input_buffer(self):
+        response = self.controller.get_gdb_response(timeout_sec=2, raise_error_on_timeout=False)
         try:
-            self.controller = GdbController(['arm-none-eabi-gdb-py', '--interpreter=mi2'])
-        except Exception as e :
-            logger.error(f'ERROR: {e} -> failed to open GDB instance.')
-            # print("Error: Failed to open GDB instance.")
-            exit(-1)
+            
+            if response:
+                # print(response)
+                if 'Quit' in response[0]['payload']:
+                    # response = self.controller.write('n\n\r')
+                    # print(response)
+                    print("Detected a weird quit condtion")
+                    response = self.controller.write(["-exec-continue"])
+                    # print(response)
+                    
+                else:
+                    pass
+                    # print(response[0]['payload'])
+        except Exception as e:
+            print(e)
+
+
+    def set_breakpoint(self, label):
+        #TODO: Check response for validity and for 
+        # self.clear_input_buffer()
+        response = self.controller.write(["-break-insert " + label])
+        
+        # print(response)
+        # print("You are here")
 
     def load_program(self, bin_file):
-        
-        response = self.controller.write("-target-select remote localhost:3333",
-                    timeout_sec=5
+
+        response = self.controller.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
+        # print(response)
+        response = self.controller.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
+        # print(response)
+        response = self.controller.write("-target-select extended-remote localhost:3333",
+                    timeout_sec=20
                     )
-        #print(response)
+        # print(response)
         response = self.controller.write('-interpreter-exec console "source command_extension.py"',
-        timeout_sec=10
+        timeout_sec=20
         )
+        # print(response)
         # response = self.controller.write('-gdb-set target-async on',
         # timeout_sec=10
         # )
@@ -113,36 +182,32 @@ class GDBInstance:
         #            )
         #print(response)
         response = self.controller.write("-file-exec-and-symbols " + bin_file , 
-                               timeout_sec=5
+                               timeout_sec=10
                     )
-        #print(response)
+        print("LOG: Loading -> " + str(bin_file))
+        # print(response)
         response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
-                    timeout_sec=5
+                    timeout_sec=10
                     )
-        #print(response)
-        response = self.controller.write(["-target-download"],
-                    timeout_sec=5
-                    )
-        #print(response)
-        # response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
-                    # timeout_sec=5
-                    # )
-        #print(response)
-        #response = self.controller.write(["-break-insert main"])
-        #TODO: Set breakpoints at approaite places here.
+        # print(response)
+        if not (self.core == 'ESP32'):
+            #You don't need to load the file this way on the esp32 its already done with the openocd
+            response = self.controller.write(["-target-download"],
+                        timeout_sec=5
+                        )
+        elif (self.core == 'ESP32'):
+            self.set_breakpoint("_jump_label")
+            time.sleep(10)
+        
         response = self.controller.write(["-exec-continue"])
-        #print(response)
-        logger.info(f'INFO: Program successfully loaded')
+        # logger.info(f'INFO: Program successfully loaded')
+        print(f'INFO: Program successfully loaded')
         #TODO: Check the reponse to see if the gdb connection is valid.
 
     def end_session(self):
         self.controller.exit()
     
-    #TODO: Use the toggle breakpoint command.
-    def set_breakpoint(self, label):
-        #TODO: Check response for validity and for 
-        response = self.controller.write(["-break-insert " + label])
-        #print(response)
+
 
     def set_alerting_breakpoint(self, label, ppid, signal_num):
         """
@@ -151,52 +216,12 @@ class GDBInstance:
         :returns: None
         """
         logger.debug(f'DEBUG: -interpreter-exec console "coverage-breakpoint {label} {ppid}, {signal_num}"')
-        response = self.controller.write(f'-interpreter-exec console "coverage-breakpoint {label} {ppid} {signal_num}"')
-        #print(response)
+        response = self.controller.write(f'-interpreter-exec console "coverage-breakpoint {label} {ppid} {signal_num}"', timeout_sec=10)
+        # print(response)
 
     def remove_breakpoint(self, num):
+        # self.clear_input_buffer()
         response = self.controller.write(["-break-delete " + num ])
-    
-    # def create_variable(self, label:str, var:str):
-    #     """
-    #         @desc creates gdb variables as an abstraction to acutal variables on target
-    #         @parameter: label: what you want the variable to be called in gdb
-    #                     var: the label of the variable you want to track
-    #     """
-    #     try:
-    #         response = self.controller.write(f'-var-create {label} * {var}')
-    #     except Exception as e:
-    #         logger.error(f'Error: {e} -> failed to create virtual variable in GDB.')
-    #         # print("LOG: Failed to create virtual variable in GDB.")
-    
-    # def read_variable(self, label:str):
-    #     """
-    #         @desc reads a GDB variable 
-    #         @parameter: label: name of the GDB variable created.
-    #     """
-    #     try:
-    #         response = self.controller.write(f'-var-update *')
-    #     except Exception as e:
-    #         logger.error(f'Error: {e} -> failed to read GDB variable.')
-    #         # print("LOG: Failed to update GDB variables.")
-    #     try:
-    #         response = self.controller.write(f'-var-evaluate-expression {label}')
-    #         # print(response)
-    #     except:
-    #         print("LOG: Failed to read the GDB variable.")
-
-    # def set_variable(self, label:str, val:str):
-    #     """
-    #         @desc sets a GDB variable -> this trickles down to the acutal variables
-    #         on a target assocated with GDB variable
-    #         @parameter: label: name of the GDB variable created
-    #                     val: value to be written.
-    #     """
-    #     try:
-    #         response = self.controller.write(f'-var-assign {label} {val}')
-    #     except:
-    #         print("LOG: Failed to set GDB variable")
-
     
     #@timing
     def write_memory(self, label:str, data:str):
@@ -232,6 +257,7 @@ class GDBInstance:
 
     def continue_execution(self):
 
+        # self.clear_input_buffer()
         response = self.controller.write('-interpreter-exec console "continue"', timeout_sec = 10)
         # response = self.controller.write("-exec-continue --all", timeout_sec = 10)
         logger.debug('DEBUG: You are in continue_execution')
@@ -241,6 +267,8 @@ class GDBInstance:
         return response
     
     def halt_exeuction(self):
+
+        # self.clear_input_buffer()
         local_pool_label = "dequeue_seed"
         self.set_breakpoint(local_pool_label)
         response = self.continue_execution()
@@ -259,10 +287,11 @@ class GDBInstance:
         # response = self.halt_exeuction()
         # print(response)
         gdb_response = None
+        self.clear_input_buffer()
         logger.info(f'INFO: -data-read-memory-bytes {label} {amount}')
         # print(f'-data-read-memory-bytes {label} {amount}')
         try:
-            gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + str(amount), timeout_sec=30)
+            gdb_response = self.controller.write('-data-read-memory-bytes '+ label + ' ' + str(amount), timeout_sec=2)
         except Exception as e:
             logger.error(f'ERROR: Failed to read memory @{label} -> {e}')
             # print(f'LOG: Failed to read memory @{label}')
@@ -285,7 +314,10 @@ class GDBInstance:
                         logger.info(f'INFO: GDB Response: {gdb_response}')
                         # print("---------GDB RESPONSE----------")
                         # print(gdb_response)
-                        parsed_response = gdb_response[i]['payload']['memory'][0]['contents']
+                        try:
+                            parsed_response = gdb_response[i]['payload']['memory'][0]['contents']
+                        except:
+                            pass                        
         else:
             parsed_response = gdb_response[0]['payload']['memory'][0]['contents']
         
@@ -294,47 +326,100 @@ class GDBInstance:
         return parsed_response
 
     def clear_breakpoint(self):
+        self.clear_input_buffer()
         response = self.controller.write('-interpreter-exec console "clear"')
         return response
         
         #MUST PARSE RESPONSE HERE TO OBTAIN seed from response.
     
-    def reset_board(self, bin_file):
-        response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
-                    timeout_sec=5
+    def reset_board(self, bin_file, openocd_obj, gdb_obj):
+        self.core = 'ESP32'
+        if self.core == 'ESP32':
+
+            openocd_obj.end_session()
+            # self.process = subprocess.Popen(["zsh", "-c", '. $HOME/Research/microfuzz/toolchains/esp-idf/export.sh && python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash "@flash_args"'])
+            self.process = subprocess.Popen(["zsh", "-c", '. $HOME/Research/microfuzz/toolchains/esp-idf/export.sh && cd ../ && idf.py flash'])
+            time.sleep(10)
+            openocd_obj.start_session()
+            gdb_obj.controller.spawn_new_gdb_subprocess()
+            
+            print("LOG: Attemping to work with in the new instance of openocd.")
+            response = self.controller.write("-target-select extended-remote localhost:3333",
+                    timeout_sec=20
                     )
-        response = self.controller.write("-file-exec-and-symbols " + bin_file , 
-                    timeout_sec=5
-                    )
-        #print(response)
-        response = self.controller.write(["-target-download"],
-                    timeout_sec=5
-                    )
-        #print(response)
-        # response = self.controller.write(['-interpreter-exec console "monitor reset 0 "'],
-                    # timeout_sec=5
-                    # )
+            # print(response)
+            logger.debug(response)
+            response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
+                        timeout_sec=5
+                        )
+            logger.debug(response)
+            response = self.controller.write('-interpreter-exec console "source command_extension.py"',
+                        timeout_sec=20
+            )
+            logger.debug(response)
+            # print(response)
+            time.sleep(.5)
+            response = self.controller.write("-file-exec-and-symbols ./ESP32.elf"  , 
+                        timeout_sec=5
+                        )
+            logger.debug(response)
+            # print(response)
+            response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
+                        timeout_sec=5
+                        )
+            logger.debug(response)
+            self.set_breakpoint("_jump_label")
+            time.sleep(5)
+            
+        else:
+
+            response = self.controller.write(['-interpreter-exec console "monitor reset halt"'],
+                        timeout_sec=5
+                        )
+            print(response)
+            response = self.controller.write("-file-exec-and-symbols " + bin_file , 
+                        timeout_sec=5
+                        )
+            # print(response)
+            response = self.controller.write(["-target-download"],
+                        timeout_sec=5
+                        )
+            # print(response)
+            # response = self.controller.wofrite(['-interpreter-exec console "monitor reset 0 "'],
+                        # timeout_sec=5
+                        # )
         #print(response)
         #response = self.controller.write(["-break-insert main"])
         #TODO: Set breakpoints at approaite places here.
+        print("LOG: Board reset sucessfully.")
         response = self.controller.write(["-exec-continue"])
 
 
 
         
     def check_for_response(self):
-        response = self.controller.get_gdb_response(timeout_sec=10, raise_error_on_timeout=False)
+        response = self.controller.get_gdb_response(timeout_sec=1, raise_error_on_timeout=False)
         return response
 
+    def check_for_aliveness(self, timeout, isError)->bool:
 
-    
+        response = self.controller.get_gdb_response(timeout_sec=timeout, raise_error_on_timeout=isError)
+        if response:
+            # print("----------------")
+            for item in response:
+                # print(str(item))
+                # print("----------------")
+                if 'SIGTRAP' in item['payload']:
+                    print("LOG: Non-fuzzing related breakpoint. Crash?")
+                    return True 
+        return False
     
     #def get_address(self):
 
 class Fuzzer:
 
     @debug_log
-    def __init__(self, seed_dir, results_dir, board_config, device_side_bin, local_pool_size, max_seed_size):
+    def __init__(self, seed_dir, results_dir, board_config, device_side_bin, local_pool_size, core):
         
         #Checks to see if directories exist if not make them.
         try:
@@ -347,17 +432,18 @@ class Fuzzer:
         except FileExistsError:
             pass
 
+        self.core = core
         self.seed_dir = seed_dir
         self.results_dir = results_dir
         self.board_config = board_config
         self.crash_dir = results_dir+'crashes'
         self.coverage_dir = results_dir + 'lists'
             
-        self.ocd = OCDInstance(self.board_config, "Cortex-M4", "Hardware") 
+        self.ocd = OCDInstance(self.board_config, self.core, "Hardware") 
         self.ocd.start_session()
         time.sleep(10) #Wait a couple seconds for ocd to get configured.
 
-        self.gdb = GDBInstance()
+        self.gdb = GDBInstance(self.core)
         #Load the device side fuzzer
         self.gdb.load_program(device_side_bin)
 
@@ -374,7 +460,10 @@ class Fuzzer:
         self.isCrash = False
         self.start_pointer = ''
         self.binary_handler = None
-        self.target_arch = 'ARM'
+        if core == 'Cortex-M4':
+            self.target_arch = 'ARM'
+        elif core == 'ESP32':
+            self.target_arch = 'XTENSA'
 
 
 
@@ -410,12 +499,39 @@ class Fuzzer:
         # if not isSetup:
             # self.gdb.halt_exeuction()
         #TODO: Maybe have a toml file for breakpoint configurations etc...
+
+
         local_pool_label = "dequeue_seed"
+        
         self.gdb.set_breakpoint(local_pool_label)
-        self.gdb.continue_execution()
+
+        response = self.gdb.continue_execution()
+        #print("----------------------")
+        #print(response)
+        #Wait for break point to be hit
+        isHalted = False
+        print("LOG: Waiting for a response from target.", end='')
+        while(not isHalted):
+            print(".", end="")
+            #print("----------------------")
+            
+            
+            if response != None:
+                for item in response:
+                    #print(item)
+                    if item['payload'] == None:
+                        continue
+                    elif 'hit Breakpoint' in item['payload']:
+                        isHalted = True
+                        print("\n", end='')
+                        break
+                    else:
+                        pass
+                        # print(item['payload'])
+            response = self.gdb.check_for_response()
 
         #TODO: There is a bug here with writing to memory.
-        
+        print("LOG: Obtain a response; Target halted and can now set memory.")        
         #Command to write -data-write-memory-bytes poolPtr.localPool[0].testCase+(offset) + '<hex_value>'
         #Command to read -data-read-memory poolPtr.localPool[0].testCase x 1 1 <seed size>
         for i in range(0, len(seeds)):
@@ -452,6 +568,10 @@ class Fuzzer:
             num_seeds = '0'+ num_seeds
         #make sure to let the fuzzer know how many seeds to work with.
         self.gdb.write_memory('&g_nSeeds', num_seeds)
+        if (self.core == 'ESP32'):
+            #Have to invalidate the cache is that we don't use stale values if there.
+            self.gdb.write_memory('&g_isStale', '01')
+            print("LOG: Setting cache invalidiation bits.")
 
         self.gdb.clear_breakpoint()
         #self.gdb.remove_breakpoint('3')
@@ -530,7 +650,32 @@ class Fuzzer:
         """
         Read the binary and find calls with their offsets. Information on ASM is found in config file (ideally)
         """
-        #TODO: Do this intialization stuff.
+
+        response = self.gdb.check_for_response()
+        isHalted = False
+        print(response)
+        print("LOG: Waiting for a response from target.", end='')
+        while(not isHalted):
+            print(".", end="")
+            #print("----------------------")
+            
+            
+            if response != None:
+                for item in response:
+                    #print(item)
+                    if item['payload'] == None:
+                        continue
+                    elif ('hit Breakpoint' in item['payload'] or 'SIGINT' in item['payload']) :
+                        isHalted = True
+                        print("\n", end='')
+                        break
+                    else:
+                        pass
+                        # print(item['payload'])
+            response = self.gdb.check_for_response()
+
+        print("LOG: Obtain a response; Target halted and can now set memory.")
+
         random_bytes = os.urandom(4)
         random_number = int.from_bytes(random_bytes)
         logger.debug(f'DEBUG: Random numbers chosen {random_bytes}, {random_number}')
@@ -539,7 +684,8 @@ class Fuzzer:
         
         
 
-        little_endian_pointer = self.gdb.read_memory('&g_sutStartPtr', '4')
+        # little_endian_pointer = self.gdb.read_memory('&g_sutStartPtr', '4')
+        little_endian_pointer = self.gdb.read_memory('&g_sutPtr', '4')
         # print(little_endian_pointer)
         self.start_pointer = self._reverse_endianness(little_endian_pointer)
         if self.target_arch == 'ARM':
@@ -609,6 +755,7 @@ class Fuzzer:
         return cov_list
         
     def handle_crash(self):
+        print("LOG: Crash detected.")
         crashing_testcase = self.pull_current_testcase()
 
         crash_area = os.listdir(self.crash_dir)
@@ -628,9 +775,11 @@ class Fuzzer:
         logger.info(f'INFO: Current execution speed: {self.iterations/elpased_time} tc/sec')
         # print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
 
-        self.gdb.reset_board('./rewritten.elf')
+        self.gdb.reset_board('./rewritten.elf', self.ocd, self.gdb)
 
         self.init_global_state()
+        self.gdb.set_alerting_breakpoint('bubble_coverage', self.pid, signal.SIGUSR1) #Want to switch this to a specific label but I know that this isn't the best way to do it.
+        self.gdb.set_alerting_breakpoint('crash_handler', self.pid, signal.SIGUSR2) #This may change with more robust error tracking.
 
         seeds = self.seed_selection()
         self.write_local_pool(seeds, True)
@@ -661,6 +810,7 @@ class Fuzzer:
 
         elpased_time = self.current_time - self.start_time
         logger.info(f'INFO: Current execution speed: {self.iterations/elpased_time} tc/sec')
+        # self.gdb.controller.stdin.write('\x03')
         # print(f'Current execution speed: {self.iterations/elpased_time} tc/sec')
 
         cov_list = self.pull_coverage_list()
@@ -688,6 +838,7 @@ class Fuzzer:
         signame = signal.Signals(signum).name
         logger.debug(f'DEBUG: Coverage handler called with signal {signame} ({signum})')
         # print(f'Coverage handler called with signal {signame} ({signum})')
+        print("LOG: Congrats! New coverage has been found. ☺︎")
 
     def crash_handler(self, signum, frame):
         self.isCrash = True
@@ -710,16 +861,18 @@ class Fuzzer:
         # print(f'Starting time {now}.')
 
         self.init_signal_handler()
-
+        self.init_global_state()
         #The labels for the breakpoints should also be in the configuration file in the future. Just hard coded for now.
-        # self.gdb.set_breakpoint('bubble_coverage') #Set this breakpoint at a certian line nuber? Instead of a label??
         self.gdb.set_alerting_breakpoint('bubble_coverage', self.pid, signal.SIGUSR1) #Want to switch this to a specific label but I know that this isn't the best way to do it.
         self.gdb.set_alerting_breakpoint('crash_handler', self.pid, signal.SIGUSR2) #This may change with more robust error tracking.
         
-        self.init_global_state()
-        # print(self.start_pointer)
+        
+        print(f'INFO: Starting Pointer {self.start_pointer}')
         logger.info(f'INFO: Starting Pointer {self.start_pointer}')
-        self.binary_handler = bw.BinaryRewrite('./build/Microfuzz.elf',  'arm-none-eabi-objdump', self.start_pointer)
+        if self.core == 'Cortex-M4':
+            self.binary_handler = bw.BinaryRewrite('./build/Microfuzz.elf',  'arm-none-eabi-objdump', self.start_pointer, 'Cortex-M4')
+        elif self.core == 'ESP32':
+            self.binary_handler = bw.BinaryRewrite('./ESP32.elf', 'xtensa-esp32s3-elf-objdump', self.start_pointer, 'ESP32')    
         self.binary_handler.read_binary()
         self.binary_handler.find_target_signature()
         self.binary_handler.find_start_location()
@@ -739,6 +892,10 @@ class Fuzzer:
         self.gdb.continue_execution()
     
         while(True):
+
+            isHalted = self.gdb.check_for_aliveness(timeout=1, isError=False)
+            if isHalted:
+                self.isCrash = True
             
             if self.isCoverage:
                 self.handle_coverage_increasing()
@@ -803,6 +960,7 @@ def main():
         required=True
     )
     parser.add_argument('-c',
+        default= None,
         help='Openocd config file.',
         required=True    
     )
@@ -816,12 +974,19 @@ def main():
         help= '',
         required=False,
     )
+    parser.add_argument('-t',
+        default= 'ESP32',
+        help= 'Target Core to load program and fuzz.',
+        required=True,
+    )
+
     args = parser.parse_args()
     #print(args)
     
     try:
-        fuzz = Fuzzer(args.s,args.r,args.c, args.b, args.l, 256)
+        fuzz = Fuzzer(args.s,args.r, args.c, args.b, args.l, args.t)
         fuzz.init_campaign()
+        print("LOG: Finshed init of fuzzer. Begining campaign now!")
         fuzz.execute_campaign()
     # ocd = OCDInstance(args.c, "Cortex-M4", "Hardware")
     # ocd.start_session()

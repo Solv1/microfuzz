@@ -78,8 +78,16 @@ SECTIONS
   {
 	. = ALIGN(4);
 	_targetdatastart = .;
-	*branch.o(.data)
-	*branch.o(.data*)
+	*susan_corners.o(.data)
+	*susan_corners.o(.data*)
+/*	*image_class.o(.data)
+	*image_class.o(.data*)
+	*tm_layers.o(.data)
+	*tm_layers.o(.data*)
+	*tm_model.o(.data)
+	*tm_model.o(.data*)
+	*tm_stat.o(.data)
+	*tm_stat.o(.data*)*/
 	*(.targetdata)
 	. = ALIGN(4);
 	_targetdataend = .;
@@ -96,8 +104,16 @@ SECTIONS
     	_sdata = .;        /* create a global symbol at data start */
 	*(EXCLUDE_FILE(fuzz.o) .data)
 	*(EXCLUDE_FILE(fuzz.o) .data*)
-	*(EXCLUDE_FILE(branch.o) .data)
-	*(EXCLUDE_FILE(branch.o) .data*)
+	*(EXCLUDE_FILE(susan_corners.o) .data)
+	*(EXCLUDE_FILE(susan_corners.o) .data*)
+	/**(EXCLUDE_FILE(image_class.o) .data)
+	*(EXCLUDE_FILE(image_class.o) .data*)
+	*(EXCLUDE_FILE(tm_layers.o) .data)
+	*(EXCLUDE_FILE(tm_layers.o) .data*)
+	*(EXCLUDE_FILE(tm_model.o) .data)
+	*(EXCLUDE_FILE(tm_model.o) .data*)
+	*(EXCLUDE_FILE(tm_stat.o) .data)
+	*(EXCLUDE_FILE(tm_stat.o) .data*)*/
     	. = ALIGN(4);
     	_edata = .;        /* define a global symbol at data end */
 }>RAM
@@ -196,8 +212,14 @@ SECTIONS
   {
 	. = ALIGN(4);
 	_targetbssstart = .;
-	*branch.o(.bss)
-	*branch.o(.bss*)
+	*susan_corners.o(.bss)
+	*susan_corners.o(.bss*)
+	/**tm_layers.o(.bss)
+	*tm_layers.o(.bss*)
+	*tm_model.o(.bss)
+	*tm_model.o(.bss*)
+	*tm_stat.o(.bss)
+	*tm_stat.o(.bss*)*/
 	_targetbssend = .;
 	. = ALIGN(4);
 
@@ -210,8 +232,14 @@ SECTIONS
     __bss_start__ = _sbss;
     *(EXCLUDE_FILE(fuzz.o) .bss)
     *(EXCLUDE_FILE (fuzz.o) .bss*)
-    *(EXCLUDE_FILE(branch.o) .bss)
-    *(EXCLUDE_FILE(branch.o) .bss*)
+    *(EXCLUDE_FILE (susan_corners.o) .bss)
+    *(EXCLUDE_FILE (susan_corners.o) .bss*)
+    /**(EXCLUDE_FILE (tm_layers.o) .bss)
+    *(EXCLUDE_FILE (tm_layers.o) .bss*)
+    *(EXCLUDE_FILE (tm_model.o) .bss)
+    *(EXCLUDE_FILE (tm_model.o) .bss*)
+    *(EXCLUDE_FILE (tm_stat.o) .bss)
+    *(EXCLUDE_FILE (tm_stat.o) .bss*)*/
     *(COMMON)
 
     . = ALIGN(4);

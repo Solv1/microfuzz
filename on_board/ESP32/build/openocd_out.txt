@@ -1,0 +1,75 @@
+Open On-Chip Debugger v0.12.0-esp32-20250422 (2025-04-22-13:02)
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : only one transport option; autoselecting 'jtag'
+Info : esp_usb_jtag: VID set to 0x303a and PID to 0x1001
+Info : esp_usb_jtag: capabilities descriptor set to 0x2000
+Info : Listening on port 6666 for tcl connections
+Info : Listening on port 4444 for telnet connections
+Info : esp_usb_jtag: serial (34:85:18:A1:FB:40)
+Info : esp_usb_jtag: Device found. Base speed 40000KHz, div range 1 to 255
+Info : clock speed 40000 kHz
+Info : JTAG tap: esp32s3.tap0 tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+Info : JTAG tap: esp32s3.tap1 tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+Info : [esp32s3.cpu0] Examination succeed
+Warn : [esp32s3.cpu1] Unexpected OCD_ID = 00000000
+Error: [esp32s3.cpu1] Examination failed
+Warn : target esp32s3.cpu1 examination failed
+Info : [esp32s3.cpu0] starting gdb server on 3333
+Info : Listening on port 3333 for gdb connections
+Info : [esp32s3.cpu0] Debug controller was reset.
+Info : [esp32s3.cpu0] Core was reset.
+Info : [esp32s3.cpu0] Target halted, PC=0x4200AEFB, debug_reason=00000000
+Info : [esp32s3.cpu0] Reset cause (21) - (USB UART reset)
+Info : [esp32s3.cpu1] Examination succeed
+Info : [esp32s3.cpu1] Debug controller was reset.
+Info : [esp32s3.cpu1] Core was reset.
+Info : [esp32s3.cpu1] Target halted, PC=0x40378976, debug_reason=00000000
+Info : [esp32s3.cpu1] Reset cause (21) - (USB UART reset)
+Info : accepting 'gdb' connection on tcp/3333
+Info : [esp32s3.cpu0] Target halted, PC=0x4200A2E8, debug_reason=00000000
+Info : Set GDB target to 'esp32s3.cpu0'
+Info : [esp32s3.cpu1] Target halted, PC=0x40378976, debug_reason=00000000
+Warn : No symbols for FreeRTOS!
+Info : [esp32s3.cpu0] Target halted, PC=0x4038CCA2, debug_reason=00000001
+Info : Flash mapping 0: 0x10020 -> 0x3c020020, 41 KB
+Info : Flash mapping 1: 0x20020 -> 0x42000020, 103 KB
+Info : Auto-detected flash bank 'esp32s3.cpu0.flash' size 32768 KB
+Info : Using flash bank 'esp32s3.cpu0.flash' size 32768 KB
+Info : [esp32s3.cpu0] Target halted, PC=0x4038CCA2, debug_reason=00000001
+Info : Flash mapping 0: 0x10020 -> 0x3c020020, 41 KB
+Info : Flash mapping 1: 0x20020 -> 0x42000020, 103 KB
+Info : Using flash bank 'esp32s3.cpu0.irom' size 104 KB
+Info : [esp32s3.cpu0] Target halted, PC=0x4038CCA2, debug_reason=00000001
+Info : Flash mapping 0: 0x10020 -> 0x3c020020, 41 KB
+Info : Flash mapping 1: 0x20020 -> 0x42000020, 103 KB
+Info : Using flash bank 'esp32s3.cpu0.drom' size 44 KB
+Info : New GDB Connection: 1, Target esp32s3.cpu0, state: halted
+Info : Detected FreeRTOS version: (10.5.1)
+Info : JTAG tap: esp32s3.tap0 tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+Info : JTAG tap: esp32s3.tap1 tap/device found: 0x120034e5 (mfg: 0x272 (Tensilica), part: 0x2003, ver: 0x1)
+Info : [esp32s3.cpu0] requesting target halt and executing a soft reset
+Info : [esp32s3.cpu0] Debug controller was reset.
+Info : [esp32s3.cpu0] Core was reset.
+Info : [esp32s3.cpu0] Target halted, PC=0x500000EF, debug_reason=00000000
+Info : [esp32s3.cpu0] Reset cause (3) - (Software core reset)
+Info : [esp32s3.cpu0] Core was reset.
+Info : [esp32s3.cpu0] Target halted, PC=0x40000400, debug_reason=00000000
+Info : [esp32s3.cpu1] Debug controller was reset.
+Info : [esp32s3.cpu1] Core was reset.
+Info : [esp32s3.cpu1] Target halted, PC=0x40000400, debug_reason=00000000
+Info : [esp32s3.cpu1] Reset cause (3) - (Software core reset)
+Info : [esp32s3.cpu0] Reset cause (3) - (Software core reset)
+Info : [esp32s3.cpu0] Target halted, PC=0x4037B214, debug_reason=00000000
+Info : Set GDB target to 'esp32s3.cpu0'
+Info : [esp32s3.cpu1] Target halted, PC=0x40378976, debug_reason=00000000
+Info : Detected FreeRTOS version: (10.5.1)
+Info : [esp32s3.cpu0] Target halted, PC=0x40383650, debug_reason=00000001
+Info : Set GDB target to 'esp32s3.cpu0'
+Info : [esp32s3.cpu1] Target halted, PC=0x40378976, debug_reason=00000000
+Info : [esp32s3.cpu0] Target halted, PC=0x4200AEFF, debug_reason=00000000
+Info : Set GDB target to 'esp32s3.cpu0'
+Info : [esp32s3.cpu1] Target halted, PC=0x40378976, debug_reason=00000000
+Info : dropped 'gdb' connection
+shutdown command invoked

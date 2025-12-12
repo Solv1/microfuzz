@@ -1,0 +1,7 @@
+Executing action: fullclean
+Executing action: remove_managed_components
+Executing action: all (aliases: build)
+Running cmake in directory /home/santiago/Research/microfuzz/on_board/ESP32/build
+Executing "cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DPYTHON=/home/santiago/.espressif/python_env/idf5.4_py3.11_env/bin/python -DESP_PLATFORM=1 -DCCACHE_ENABLE=0 /home/santiago/Research/microfuzz/on_board/ESP32"...
+-- IDF_TARGET is not set, guessed 'esp32s3' from sdkconfig '/home/santiago/Research/microfuzz/on_board/ESP32/sdkconfig'
+-- Found Git: /usr/bin/git (found version "2.39.5") 
